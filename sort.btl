@@ -1,0 +1,15 @@
+ignored.word = "a"
+ignored.word = "from"
+ignored.word = "for"
+ignored.word = "of"
+ignored.word = "-"
+ignored.word = "and"
+ignored.word = "in"
+ignored.word = "this"
+ignored.word = "on"
+print.use.tab = off
+key.format = "{%-1n(author)%2d(year):%-T(title)}"
+sort = {on}
+sort.format = {%N(author)}
+default.key={foo}
+key.generation = off

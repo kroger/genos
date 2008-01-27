@@ -1,4 +1,6 @@
 ignored.word = "a"
+ignored.word = "o"
+ignored.word = "em"
 ignored.word = "from"
 ignored.word = "for"
 ignored.word = "of"
@@ -11,4 +13,4 @@ print.use.tab = off
 key.format = "{%-1n(author):%-T(title)}"
 sort = {on}
 sort.format = {%N(author)}
-#key.generation = off
+key.generation = off

@@ -9,13 +9,19 @@ ignored.word = "and"
 ignored.word = "in"
 ignored.word = "this"
 ignored.word = "on"
+ignored.word = "new"
 print.use.tab = off
-key.format = {(key)
-           {%s($key)}
-           {(year){%-1n(author)%2d(year):%-T(title)}{%-1n(author):%-T(title)} }}
+key.format =
+{(key)
+  {%s($key)}
+  { {%-1n(author) # %-1n(editor)}
+    {%2d(year)}: %-T(title)}
+}
+
 key.base = lower
 key.number.separator = "-"
 sort = {on}
 sort.format = {%N(author)}
 key.generation = on
 #preserve.keys = on
+tex.define = {ö = }

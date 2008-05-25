@@ -1,0 +1,84 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{anppom2008}[2008/04/26]
+
+% margem sup 3.5 cm: há 1,5 cm para header, + 2 cm para top
+% margem inf 2.5 cm: há 1,5 cm para foot, + 1 cm para bottom
+% margem esq/dir 3 cm
+\RequirePackage[a4paper,top=2.5cm,left=2cm,right=2cm,bottom=3cm]{geometry}
+
+\RequirePackage{url}
+%\RequirePackage{caption2}
+\RequirePackage{zref-lastpage}
+\RequirePackage{br-chicago}
+\RequirePackage{fancyhdr}
+\RequirePackage{times}
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage{setspace}
+\RequirePackage[utf8,utf8x]{inputenc}
+\RequirePackage[brazil]{babel}
+\RequirePackage{indentfirst}
+\usepackage{wasysym}
+\usepackage[font=it]{caption}
+\usepackage{subfig}
+\usepackage{graphicx,url}
+\usepackage{indentfirst}
+
+%\renewcommand{\captionfont}{\small\itshape}
+
+%\addtolength{\headsep}{1cm}
+\setlength{\headheight}{28pt}
+
+\titleformat{\section}{}
+{}{0pt}{\large\sf\bfseries}
+
+\titleformat{\subsection}{}
+{}{1.27cm}{\large\sf\bfseries\itshape}
+
+\parindent 1.5cm
+\parskip   6pt
+
+\flushbottom
+
+\renewcommand{\title}[1]{
+  \begin{center}
+    \Large \textbf{\textsf{#1}}
+  \end{center}
+}
+
+\renewcommand{\author}[4]{
+  \begin{flushright}
+    \small
+    \textit{#1} \\
+    \textit{#2} \\
+    \url{#3} \\
+    \url{#4} \\
+\end{flushright}
+}
+
+\newenvironment{sumario}
+{\textbf{Sumário:}\small \begin{spacing}{1}\list{}{
+      \setlength{\leftmargin}{\parindent}
+      \setlength{\rightmargin}{\leftmargin}
+    }
+  \item\relax}
+  {\endlist\end{spacing}}
+
+\newcommand{\keywords}[1]{
+  \textbf{Palavras-Chave: }#1
+}
+
+\pagestyle{fancy}
+\lhead{}
+\chead{XVIII Congresso da Associação Nacional de Pesquisa e
+  Pós-graduação (ANPPOM)\\
+  Salvador - 2008
+}
+\rhead{}
+\lfoot{}
+\cfoot{\small Trabalho submetido à avaliação pela Comissão Científica
+  do XVIII Congresso da ANPPOM\\Página \thepage{} de \pageref{LastPage}}
+\rfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\refname}{Referências Bibliográficas}

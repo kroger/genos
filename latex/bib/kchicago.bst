@@ -622,7 +622,7 @@ ENTRY
 %
 MACRO {jan} {"Janeiro"}
 MACRO {feb} {"Fevereiro"}
-MACRO {mar} {"Mar�o"}
+MACRO {mar} {"Março"}
 MACRO {apr} {"Abril"}
 MACRO {may} {"Maio"}
 MACRO {jun} {"Junho"}
@@ -643,12 +643,12 @@ MACRO {dec} {"Dezembro"}
 FUNCTION {debugval}
 {  ": [" *
   swap$ *    %$
-  "] in " * cite$ *    %$
+  "] em " * cite$ *    %$
   top$      %$
 }
   
 FUNCTION {debugmsg}
-{  " in " * cite$ * top$
+{  " em " * cite$ * top$
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1042,7 +1042,7 @@ FUNCTION {format.sortify.clip}
 FUNCTION {check.empty}
 { 't := 
   duplicate$ empty$
-    { "empty " t * " in " * cite$ * warning$ 
+    { "vazio " t * " em " * cite$ * warning$ 
     }
     'skip$                              %$
   if$                              %$
@@ -1143,7 +1143,7 @@ FUNCTION {tie.or.space.connect}
 FUNCTION {either.or.check}
 { empty$
     'pop$
-    { "can't use both " swap$ * " fields in " * cite$ * warning$ 
+    { "não é possível usar ambos os campos " swap$ * " em " * cite$ * warning$ 
     }
   if$
 }
@@ -1278,7 +1278,7 @@ FUNCTION {check.q}
   duplicate$ empty$
     { pop$                              %$
       cite$ format.clip 'u :=           %$
-      "Need " t * " in " * cite$ * "; using:  " * u * warning$
+      "Necessário " t * " em " * cite$ * "; usando:  " * u * warning$
       u
       inc.j
     }
@@ -1425,7 +1425,7 @@ FUNCTION {format.names.firstfirst}
                 }
                 'skip$                  %$
               if$                  %$
-              t "others" =
+              t "outros" =
                 { etal * 
                 }
                 { andfunc * t * 
@@ -1532,7 +1532,7 @@ FUNCTION {make.year.or.oyear.month}
     { make.year.month
     }
     { year empty$                  %$
-        { "oyear without year in " cite$ * warning$
+        { "oyear sem o ano em " cite$ * warning$
         }
         'skip$                  %$
       if$                  %$
@@ -1581,7 +1581,7 @@ FUNCTION {make.editors.secondary}
         { "e"
         }
       if$                  %$
-      "dited by " * editor format.names.firstfirst * 
+      "ditado por " * editor format.names.firstfirst * 
     }
   if$                                        %$
 }
@@ -1630,10 +1630,10 @@ FUNCTION {make.translators}
       "ranslated " *
       flanguage empty$                  %$
         'skip$                  %$
-        { "from the " * flanguage * space *
+        { "de " * flanguage * space *
         }
       if$                  %$
-      "by " * translator format.names.firstfirst *
+      "por " * translator format.names.firstfirst *
     }
   if$                  %$
 }
@@ -1650,7 +1650,7 @@ FUNCTION {make.illustrators}
         { "i"
         }
       if$                  %$
-      "llustrated by " * illustrator format.names.firstfirst *
+      "lustrado por " * illustrator format.names.firstfirst *
     }
   if$                  %$
 }
@@ -1994,7 +1994,7 @@ FUNCTION {output.series.number}
     { number empty$                   %$
         { ""
         }
-        { "Can't use `number' without `series' in " cite$ * warning$
+        { "Não é possível usar `number' sem `series' em " cite$ * warning$
           "" 
         }
       if$                   %$
@@ -2012,7 +2012,7 @@ FUNCTION {output.series.number}
   { series space * 
           "no." *
     number tie.or.space.connect    
-   "number and seriesedition" seriesedition either.or.check
+   "número e edição da série" seriesedition either.or.check
   }
       if$                   %$
     }
@@ -2043,7 +2043,7 @@ FUNCTION {output.volume.series}
           if$                   %$
         }
       if$                   %$
-      "volume and number" number either.or.check
+      "volume e número" number either.or.check
     }
   if$                   %$
   comma output
@@ -2066,13 +2066,13 @@ FUNCTION {make.chapter.of}
     { ""
     }
     { type empty$        %$
-        { "Chapter" 
+        { "Capítulo" 
         }
         { type "t" change.case$         %$
         }
       if$        %$
       chapter tie.or.space.connect
-      " of " *
+      " de " *
     }
   if$                   %$
 }
@@ -2103,7 +2103,7 @@ FUNCTION {make.chapter}
 %    \begin{macrocode}
 FUNCTION {make.number.tr}
 { type empty$                   %$
-    { "Technical Report" 
+    { "Relatório Técnico" 
     }
     { type "t" change.case$                    %$
     }
@@ -2126,11 +2126,11 @@ FUNCTION {make.url}
    { skip$ }
    {
     lastaccess empty$ 
-      {"Dispon�vel em \url{" url * "}" * add.period$  write$ }
-      {"Dispon�vel em \url{" url * "}" * write$ }
+      {"Disponível em \url{" url * "}" * add.period$  write$ }
+      {"Disponível em \url{" url * "}" * write$ }
     if$ 
     lastaccess empty$
-      { "Last access date missing" warning$ }
+      { "Data de último acesso faltando" warning$ }
       {" (" lastaccess * ")" * add.period$ write$  }
     if$
     newline$ 
@@ -2197,7 +2197,7 @@ FUNCTION {set.principal-field.principal-type}
               blank.q
               organization.q
               key.q
-              "author, organization, or key for entry type " type$ * check.q   %$
+              "autor, organização, ou key para tipo de entrada " type$ * check.q   %$
             }
             % for all other entry types
             { start.a.q
@@ -2205,7 +2205,7 @@ FUNCTION {set.principal-field.principal-type}
               blank.q
               blank.q
               key.q
-              "author or key for entry type " type$ * check.q       %$
+              "autor ou key para tipo de entrada " type$ * check.q       %$
             }
           if$                   %$
         }
@@ -2491,21 +2491,21 @@ FUNCTION {format.names.for.sort}
                 % last char will always be a space
                 % accumulator contains whole name token
                 { pop$       %$  throw space away for now; top of stack is now accumulator
-%                  duplicate$ "found a space; accumulator is" debugval %$
+%                  duplicate$ "encontrado um espaço; acumulador é" debugval %$
                   duplicate$ %$
                     duplicate$ text.length$ #2 =        %    2 chars long
                     swap$ behead head period =          %$   2d char is period    
                   and
                     % name token in accumulator is an initial, so add a space to it
                     { space *
-%                      duplicate$ "found an initial" debugval %$
+%                      duplicate$ "encontrada uma inicial" debugval %$
                     }
                     % name token in accumulator is not an initial
                     'skip$      %$
                   if$        %$
                   % in either case, concatenate the accumulator the name on the
                   % stack and initialize it again
-%                  duplicate$ "adding to name" debugval %$
+%                  duplicate$ "adicionando ao nome" debugval %$
                   * ""
                 }
                 % accumulator contains partial name token
@@ -2518,7 +2518,7 @@ FUNCTION {format.names.for.sort}
           while$            %$
           % we always end up with an empty string on the stack
           pop$     %$
-%          duplicate$ "formatted first-name is" debugval %$
+%          duplicate$ "primeiro nome formatado é" debugval %$
 %          s nameptr "{ff}{vv}{ll}{jj}" format.name$ "it came from" debugval %$
         }
       if$      %$
@@ -2532,7 +2532,7 @@ FUNCTION {format.names.for.sort}
         }
         { delimiter.name *
       nameptr numnames =
-            t "others" =
+            t "outros" =
           and
             { "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" *
             }
@@ -2775,7 +2775,7 @@ FUNCTION {book}
         { "In "
         }
         { "Volume" volume tie.or.space.connect
-          " of " *
+          " de " *
         }
       if$                      %$
       make.crossref * comma output
@@ -2784,7 +2784,7 @@ FUNCTION {book}
   new.block
   yearcomp empty$                              %$
     'skip$                              %$
-    { "Composed in " yearcomp *
+    { "Composto em " yearcomp *
       comma output
       new.block
     }
@@ -2800,9 +2800,9 @@ FUNCTION {book}
 %    \begin{macrocode}
   fyear empty$
     'skip$
-    { "First published "
+    { "Primeiro publicado "
       translator empty$ flanguage empty$ not and
-        { "in " * flanguage * space *
+        { "em " * flanguage * space *
         }
         'skip$
       if$
@@ -2812,9 +2812,9 @@ FUNCTION {book}
 %    \begin{macrocode}
       make.as.ftitle.ital * space output
       faddress empty$ fpublisher empty$ not and
-        { "by "
+        { "por "
         }
-        { "in "
+        { "em "
         }
       if$                  %$
       space output
@@ -2870,7 +2870,7 @@ FUNCTION {inbook}
             { "empty chapter, type, and pages in " cite$ * warning$ 
               "In "
             }
-            { "Pages " make.pages * " in " *
+            { "Páginas " make.pages * " em " *
             }
           if$                  %$
         }
@@ -3064,7 +3064,7 @@ FUNCTION {thesis}
 }
 FUNCTION{mastersthesis}
 { type empty$               %$
-    { "Master's thesis"
+    { "Dissertação de Mestrado"
     }
     { type
     }

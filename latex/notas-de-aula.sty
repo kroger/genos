@@ -1,0 +1,16 @@
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage[top=25mm,bottom=25mm,left=25mm,right=25mm]{geometry}
+
+\newcommand{\rodape}[1]{
+  \pagestyle{fancy}
+  \fancyfoot[c]{#1\,---\,\thepage}
+  \fancyhead{}
+  \fancyhead[LO,RE]{}
+  \fancyhead[LE,RO]{}
+  \renewcommand\headrulewidth{0pt} 
+}

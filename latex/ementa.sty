@@ -1,0 +1,141 @@
+\usepackage{ifthen}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,top=2cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{ulem}
+%\usepackage{fourier}
+\usepackage{times}
+
+\newcommand{\titulo}[1]{
+  {\large \textsf{\textbf{#1}}} \\
+}
+
+% \newcommand{\disciplina}[1]{
+%   \ifthenelse{\equal{#1}{009}}{MUS #1 --- LEM I}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{010}}{MUS #1 --- LEM II}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{011}}{MUS #1 --- LEM III}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{012}}{MUS #1 --- LEM IV}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{013}}{MUS #1 --- LEM V}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{110}}{MUS #1 --- Composição III}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{111}}{MUS #1 --- Composição IV}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{112}}{MUS #1 --- Composição V}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{113}}{MUS #1 --- Composição VI}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{114}}{MUS #1 --- Composição VII}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{115}}{MUS #1 --- Composição VIII}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{506}}{MUS #1 --- Informática em Música II}{\hspace{-1ex}}
+%   \ifthenelse{\equal{#1}{A56}}{MAT #1 --- Paradigmas de Linguagens de
+%     Programação}{\hspace{-1ex}}
+% }
+
+\newcommand{\disciplina}[1]{
+  \ifthenelse{\equal{#1}{009}}
+  {MUS #1 --- LEM I}
+  {\ifthenelse{\equal{#1}{010}}
+    {MUS #1 --- LEM II}
+    {\ifthenelse{\equal{#1}{011}}
+      {MUS #1 --- LEM III}
+      {\ifthenelse{\equal{#1}{012}}
+        {MUS #1 --- LEM IV}
+        {\ifthenelse{\equal{#1}{013}}
+          {MUS #1 --- LEM V}
+          {\ifthenelse{\equal{#1}{110}}
+            {MUS #1 --- Composição III}
+            {\ifthenelse{\equal{#1}{111}}
+              {MUS #1 --- Composição IV}
+              {\ifthenelse{\equal{#1}{112}}
+                {MUS #1 --- Composição V}
+                {\ifthenelse{\equal{#1}{113}}
+                  {MUS #1 --- Composição VI}
+                  {\ifthenelse{\equal{#1}{114}}
+                    {MUS #1 --- Composição VII}
+                    {\ifthenelse{\equal{#1}{115}}
+                      {MUS #1 --- Composição VIII}
+                      {\ifthenelse{\equal{#1}{A56}}
+                        {MAT #1 --- Paradigmas de Linguagens de
+                          Programação}
+                        {\ifthenelse{\equal{#1}{506}}
+                          {MUS #1 --- Informática em Música II}}}}}}}}}}}}}}
+
+\newcommand{\cabecalho}[2]{
+  \large
+  \titulo{UNIVERSIDADE FEDERAL DA BAHIA}
+  \ifthenelse{\equal{#1}{A56}}
+  {\titulo{INSTITUTO DE MATEMÁTICA}
+    \titulo{DEPARTAMENTO DE CIÊNCIA DA COMPUTAÇÃO}}
+  {\titulo{ESCOLA DE MÚSICA}
+    \titulo{DEPARTAMENTO DE CLEM}}
+  \textbf{Disciplina}:\disciplina{#1}\,---\,#2\\
+  \textbf{Prof.}: Pedro Kröger \url{<pedro.kroger@gmail.com>} \\
+  \textbf{Página da disciplina:} http://genos.mus.br/aulas/\ifthenelse{\equal{#1}{A56}}{mata56}{mus#1} \\
+  \ifthenelse{\equal{#1}{052}}
+  {\textbf{Cadastro e histórico da lista de discussão:} \textsf{listas.dcc.ufba.br/pipermail/mat052t01}}
+  {}
+}
+
+\setlength{\parindent}{0cm}
+\setlength\parskip{\smallskipamount}
+
+\newcounter{aulac}
+\setcounter{aulac}{1}
+
+\newcommand{\aulan}{
+  Aula \arabic{aulac}
+  \addtocounter{aulac}{1}
+}
+
+\newcommand{\aula}[3][1]{
+  \ifthenelse{\equal{#1}{feriado}}
+  {\item [\aulan] \sout{#2} \\ #3}
+  {\item [\aulan] #2 \\ #3}
+}
+
+\newcommand{\semana}[5][1]{
+  {\data{#2}} & #3 &
+    \data{#4} & #5 \\
+  \hline
+}
+
+\newcommand{\data}[1]{
+  \ifthenelse{\equal{#1}{}}
+  {}
+  {\textit{#1}:}
+}
+
+\newenvironment{aulas}
+{\begin{description}}
+{\end{description}}
+
+\newenvironment{aulas2}[2]
+{\begin{tabular}{|lp{6cm}|lp{6cm}|}
+\hline
+\textbf{#1} & & \textbf{#2} & \\
+\hline \hline}
+{\end{tabular}}
+
+\newcommand{\analise}{análise em sala\newline\consulta}
+\newcommand{\consulta}{consulta trabalhos}
+\newcommand{\entregan}{\newline\textbf{\textit{entrega trabalho}}}
+\newcommand{\entrega}{\textbf{\textit{entrega trabalho}}}
+\newcommand{\relatorio}{\textbf{\textit{relatório oral}}}
+\newcommand{\entregag}[1]{\textbf{\textit{entrega {#1}}}\newline audição das obras}
+\newcommand{\assunto}[1]{#1}
+\newcommand{\feriado}[1]{\textit{#1}}
+
+\newcommand{\nome}[1]{\textit{#1}}
+
+\newcommand{\fev}{ fevereiro}
+\newcommand{\mar}{ março}
+\newcommand{\abr}{ abril}
+\newcommand{\mai}{ maio}
+\newcommand{\jun}{ junho}
+\newcommand{\jul}{ julho}
+
+
+% Note that this package changes \em and \emph to be underline. To
+% change this behavior back to normal, use the \normalem command, for
+% example
+\normalem
+

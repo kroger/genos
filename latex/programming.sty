@@ -1,0 +1,79 @@
+\usepackage{listings}
+\usepackage[portuges,english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+%\geometry{a4paper,left=5cm,right=1cm,top=2cm,bottom=2cm}
+% Necessário para as margens
+\usepackage{xdoc2}
+%\usepackage{hyperref}
+%\hypersetup{pdfpagemode=UseOutlines,linkcolor=false,linkbordercolor=none,pageanchor=true,bookmarks=true,colorlinks=false}
+
+
+\newcommand{\lyxarrow}{\leavevmode\,$\triangleright$\,\allowbreak}
+
+\newcommand{\classtoplevel}{\section}
+\newcommand{\classlevel}{\subsection}
+\newcommand{\classsublevel}{\subsubsection}
+
+\newcommand{\classname}[1]{\classtoplevel{#1}}
+\newcommand{\class}{\classlevel{Class Definition}}
+\newcommand{\implementation}{\classlevel{Class Implementation}}
+\newcommand{\datamembers}{\classlevel{Class Data Members}}
+\newcommand{\constructor}{\classlevel{Class Constructor}}
+\newcommand{\destructor}{\classlevel{Class Destructor}}
+\newcommand{\methods}{\classlevel{Class Methods}}
+
+\setlength\parindent{0cm}
+
+\newcommand{\comment}[1]{\relax}
+
+\renewcommand{\lstlistingname}{Procedimento}
+
+\newcommand{\procedimento}[2]{
+  \vspace{\baselineskip}
+  \vspace{\baselineskip}
+  \marginpar{\normalsize\raggedleft{\bf{#1}} \\  {\tt{#2}}}
+  \addcontentsline{toc}{subsubsection}{#1: #2}
+  }
+
+\newcommand {\code}[1]{{\tt #1}}
+
+\newcommand{\proc}[1]{
+  \procedimento{Proc}{#1}
+}
+
+\newcommand{\met}[1]{
+  \procedimento{Method}{#1}
+  \label{met:#1}
+}
+
+\newcommand{\var}[1]{
+  \procedimento{Variable}{#1}
+} 
+% Procedimento
+% Método
+% Função
+
+\lstdefinelanguage{itcl}%
+  {keywords={method,common,class},
+    ndkeywords={public,private,body,bodyconfig,protected}
+    }%
+
+ \lstset{
+   language=itcl,
+   alsolanguage=tcl,
+   numbers=left,
+   stepnumber=1,
+   numberstyle=\tiny,
+   numbersep=5pt,
+   showspaces=false,
+   showtabs=false,
+   showstringspaces=false,
+   tabsize=4,
+   commentstyle=\itshape,
+   extendedchars=true,
+   flexiblecolumns= true,
+   literate= {<=}{{$\leq$}}1 {>=}{{$\geq$}}1 {!=}{{$\neq$}}1,
+   ndkeywordstyle=\sffamily,
+   escapeinside={\;\#}{\^^M},
+   }

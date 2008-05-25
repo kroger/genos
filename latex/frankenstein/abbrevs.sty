@@ -1,0 +1,861 @@
+%^^A* copyright
+% \iffalse
+%
+%   This program is part of the Frankenstein bundle for LaTeX2e.
+%
+%   Copyright (C) 1995-1999 Matt Swift <swift@alum.mit.edu>
+%
+%   This file contains both the code and documentation for the
+%   abbrevs LaTeX package.  It will work ONLY if it is placed in a
+%   proper directory.  Files called README, INSTALL, abbrevs.tex
+%   and abbrevs.ins should have also been distributed to you
+%   with this file.  See them for more information on how to typeset
+%   the documentation with LaTeX and how to generate a version of this
+%   file that will work faster than this one.
+%
+%   This program is free software; you can redistribute it and/or modify
+%   it under the terms of the GNU General Public License as published by
+%   the Free Software Foundation; either version 2 of the License, or
+%   (at your option) any later version.
+%
+%   This program is distributed in the hope that it will be useful,
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%   GNU General Public License for more details.
+%
+%   You should have received a copy of the GNU General Public License
+%   along with this program (the file COPYING); if not, write to the
+%   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+%   USA.
+%
+%      NOTE:  I am willing to specially license this code.
+%             Please simply contact me with your proposal.
+%
+% \fi  
+%
+%^^A* checks
+%
+%^^A NOTE:  The character table, with two %'s, will get written to all files.
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%
+% \CheckSum{304}
+% 
+% \begin{abstract}
+%   ``Abbreviation macros'' expand to defined text and insert following space
+%   intelligently, based on context.  They can also expand to one thing the first
+%   time they are used and another thing on subsequent invocations.  Thus they
+%   can be abbreviations in two senses, in the source and in the document.
+%   Useful applications include the abstraction of textual elements such as names
+%   without fussing over spacing and the automatic expansion of abbreviations and
+%   acronyms at their first use.  The initial and subsequent expansions of an
+%   abbreviation macro are available at any time via explicit commands.
+%   Abbreviation macros are grouped into categories; there are hooks applicable
+%   to each category.  Categories can be reset so that subsequent abbreviation
+%   macros in that category behave as if used for the first time again.
+%
+%   A generic facility is also provided for suffixes like 1900\BC and 6:00\PM,
+%   which correctly handles following periods.
+% \end{abstract}
+% \tableofcontents
+%
+% \part{Discussion}
+%
+% \section{General}
+%
+% \DescribeMacro{\nospacelist}
+%   An abbreviation macro \cs\foo that expands to \meta{text} is robust;
+%   \cs\foo can be used in place of \meta{text} almost anywhere.  A space is
+%   inserted following an abbreviation macro when the first non-white character
+%   following it is \emph{not} in the set \cs\nospacelist, whose default value
+%   is |,.':;?-~!)]{}|.
+%
+%   When an abbreviation macro has different initial and subsequent expansions,
+%   either may be explicitly requested by adding a suffix to the abbreviation
+%   macro.  The commands |\|\meta{command}|short| and |\|\meta{command}|long|
+%   are also defined whenever an abbreviation macro |\|\meta{command} is
+%   defined.  Using the |\|\meta{command}|long| command does not affect what
+%   the next abbreviation macros expands to. 
+%
+%   All abbreviation macros are assigned categories, identified by a string.
+%   Four categories are defined by the package, and it is easy to add more.
+%   Categories facilitate handling different groups of abbreviation macros in
+%   different ways.
+%
+%   \caveat{Regarding CJK macros and probably other 8-bit input.  If you use
+%   the \package{abbrevs} package with the CJK macros for typesetting Chinese,
+%   Japanese, and Korean text, you must define your abbreviations within the
+%   CJK environment.  I believe that the CJK macros work by interpreting 8-bit
+%   input in the source file.  But this input is only interpreted properly
+%   within the CJK environment.  If you define the abbrevs outside, such as in
+%   the preamble, you will just get a bunch of numbers when your abbreviation
+%   expands.}
+%
+%   I would use capital letters for the name of this macro, since it doesn't
+%   seem like a user command to me, but I'm modelling after the kernel's
+%   \cs\nocorrlist.
+%
+%   \todo{Emulate the \package{acronym} and \package{acromake} packages.}
+%
+% \section{Usage}
+%
+%   \newbook\worst{Worstward Ho}
+%   \newbook\fall{All That Fall}
+%   \newbook\nacht{Nacht und Tr\"aume}
+%   \newbook\csp{Collected Shorter Plays \emph{(}CSP\emph{)}}[CSP]
+%   \newname\joyce{James Joyce}[Joyce]
+%   \newname\nixon{Richard Milhous Nixon}[Nixon]
+%   \newname\ww{Wordsworth}
+%   \newname\beckett{Samuel Beckett}[Beckett]
+%   \newwork\godot{Waiting for Godot}[Godot]
+%   \newbook\prelude{The Prelude}
+%   \newabbrev\ART{American Repetrory Theater (ART)}[ART]
+%^^A FIX -- reduce, move
+% Examples of how to define abbreviation macros:
+% \begin{codeexample}
+%   \newbook\worst{Worstward Ho}
+%   \newbook\fall{All That Fall}
+%   \newbook\nacht{Nacht und Tr\"aume}
+%   \newbook\csp{Collected Shorter Plays \emph{(}CSP\emph{)}}[CSP]
+%   \newname\joyce{James Joyce}[Joyce]
+%   \newname\nixon{Richard Milhous Nixon}[Nixon]
+%   \newname\ww{Wordsworth}
+%   \newname\beckett{Samuel Beckett}[Beckett]
+%   \newwork\godot{Waiting for Godot}[Godot]
+%   \newbook\prelude{The Prelude}
+%   \newabbrev\ART{American Repetrory Theater (ART)}[ART]
+% \end{codeexample}
+% 
+% \todo{Give example of using |short| or |long|.}
+%
+% Examples of how to use the macros, and how they are typeset:\relax
+% \footnote{\cs\lips is defined in the \package{lips} package, part of the
+% \Frankenstein bundle.}
+% \begin{bothexample}
+%   The manuscripts of \ww's \prelude differ. \lips Before he began \prelude,
+%   \ww wrote \lips
+% \end{bothexample}
+% \begin{bothexample}
+%   \nixon was the 37st American President. \lips Many Americans like my uncle
+%   Norm voted for \nixon enthusiastically in both 1968 and 1972.
+% \end{bothexample}
+% \begin{bothexample}
+%   \beckett gained international noteriety with the play \godot in the early
+%   1950s.  \beckett wrote \godot, he said, as a diversion from the novels he
+%   was then writing.  I have seen this play at the \ART in Cambridge,
+%   Massachusetts.  The \ART is often disappointing, but I liked their
+%   production of \godot.
+% \end{bothexample}
+% 
+% \DescribeMacro{\newabbrev}
+%   \cs\newabbrev\marg{\\command}\marg{initial}\oarg{subsequent} defines an
+%   abbreviation macro \meta{\\command} of category \cat{Generic}.
+%
+% \DescribeMacro{\newname}
+%   \cs\newname\marg{\\command}\marg{initial}\oarg{subsequent} defines an
+%   abbreviation macro \meta{\\command} of category \cat{Name}.
+%
+% \DescribeMacro{\newbook}
+%   \cs\newbook\marg{\\command}\marg{initial}\oarg{subsequent} defines an
+%   abbreviation macro \meta{\\command} of category \cat{Book}.
+%
+% \DescribeMacro{\newwork}
+%   \cs\newwork\marg{\\command}\marg{bibliography
+%   key}\marg{initial}\oarg{subsequent} defines an abbreviation macro
+%   \meta{\\command} of category \cat{Work}.  Works can be distinguished from
+%   books by being listed in a separate bibliography, e.g., of primary works
+%   referred to by short titles in the main text.  The defining command
+%   therefore requires a \BibTeX{} key as an argument.  The first use of the
+%   work serves as a citation to that bibliography, and all uses of the work
+%   generate an index entry.
+%
+% \todo{\cat{Work}s are not yet fully implemented.  Presently they are the same
+% as \cat{Book}s.}
+%
+% \section{Date Marks}
+% \DescribeMacro{\PM}
+% \DescribeMacro{\AM}
+% \DescribeMacro{\BC}
+% \DescribeMacro{\AD}
+%   These variants of abbreviation macros correctly handle following periods.
+%   \begin{bothexample}
+%     She left for work before 6\AM, but
+%     did not arrive until 12\PM.  The
+%     interval 5\BC--5\AD is one year
+%     shorter than the interval
+%     95\AD--105\AD.
+%   \end{bothexample}
+%
+% \section{Programmers' interface}
+%
+% \DescribeMacro{\ResetAbbrevs}
+%   When abbreviation macros are reset, their next invocation will expand to
+%   the initial text.  Subsequent occurrences will expand to the subsequent
+%   text again.  For exmaple, using \cs\ResetAbbrevs|{Name}| at the beginning
+%   of chapters will cause the full name to be used only for the first
+%   occurrence in each chapter.  \cs\ResetAbbrevs\marg{category list} resets
+%   all abbreviation macros of the listed categories.  The list is
+%   comma-separated, and the category \cat{All} is a shorthand for all defined
+%   categories.   Example:
+%   \begin{codeexample}
+%     \SaveCS\chapter
+%     \renewcommand\chapter {%
+%       \ResetAbbrevs{All}%
+%       \MDSavedchapter
+%     }
+%   \end{codeexample}
+%
+% \DescribeMacro{\NewAbbrevCategory}
+% \DescribeMacro{\TMFontAll}
+% \DescribeMacro{\TMHookAll}
+% \DescribeMacro{\TMResetAll}
+% \DescribeMacro{\TMFont<category>}
+% \DescribeMacro{\TMHook<category>}
+% \DescribeMacro{\TMReset<category>}
+%   To create new categories of abbreviation, use
+%   \cs\NewAbbrevCategory\marg{category name}.  Macros
+%   \cs\TMFont\meta{category}, \cs\TMHook\meta{category}, and
+%   \cs\TMReset{}\meta{category} are all reserved.  The hook and font slots
+%   start empty.  The virtual category \cat{All} is predefined and refers to
+%   all defined categories.  \cs\TMHookAll and \cs\TMFontAll are called
+%   \emph{before} the respective category-specific commands.
+%
+% \DescribeMacro{\NewUserAbbrevDefiner}
+%   \cs\NewUserAbbrevDefiner\marg{defining
+%   command}\marg{category}\oarg{definer} defines a user command \meta{defining
+%   command}.  With the default \meta{definer}, \cs\TMDefineAbbrevStandard,
+%   the \meta{defining command} will take the arguments \marg{abbrev
+%   command}\marg{initial text}\oarg{subsequent text} and defines
+%   \meta{abbrev command} to be a plain or switching abbreviation macro as
+%   appropriate.  If given, the optional argument \meta{definer} should be a
+%   macro name, which will be first be passed a \marg{category}, then will
+%   read user arguments (e.g., in the case of \cs\TMDefineAbbrevStandard,
+%   \marg{cs}\marg{initial}\oarg{subsequent}).  The \meta{definer} is
+%   expected of course to do something like define \marg{cs}.
+%
+% \DescribeMacro{\TMInitialSuffix}
+% \DescribeMacro{\TMSubsequentSuffix}
+%   The factory default suffixes ``short'' and ``long'' may be changed by
+%   changing the definitions of \cs\TMSubsequentSuffix and
+%   \cs\TMInitialSuffix.  The change should be made after the package is
+%   loaded but before any abbreviation macros have been defined.
+%
+% \DescribeMacro{\DateMark}
+%   Abbreviation macros like \cs\PM are defined as \cs\DateMark{}s, like this,
+%   without the final period:
+%   \begin{codeexample}
+%     \newcommand\PM {%
+%       \DateMark{p.m}%
+%     }
+%   \end{codeexample}
+%
+%  \DescribeMacro{\ifTMInhibitSwitching}
+%  \DescribeMacro{\TMInhibitSwitchingfalse}
+%  \DescribeMacro{\TMInhibitSwitchingtrue}
+%  \DescribeMacro{\ifTMAlwaysLong}
+%  \DescribeMacro{\TMAlwaysLongtrue}
+%  \DescribeMacro{\TMAlwaysLongfalse}
+% When \cname{ifTMInhibitSwitching} is true, first occurrences of an
+% abbreviation macro will expand to the initial expansion as usual, but they
+% will not trigger the change to subsequent expansions.  Example: inhibit
+% switching inside footnotes, and abbreviations will not be spelled out for the
+% first and only time in a footnote. That is, if their first appearance is in a
+% footnote, their first appearance in the main text will also expand to the
+% long version.  See the configuration file for how to do this.
+%
+% When \cs\TMAlwaysLong is true, every abbreviation macro expands to its
+% initial expansion.
+%
+% \StopEventually{}
+%
+% \part{Implementation}
+%
+% \section{Version control}
+%
+%  \begin{macro}{\fileinfo}
+%  \begin{macro}{\DoXUsepackagE}
+%  \begin{macro}{\HaveECitationS}
+%  \begin{macro}{\fileversion}
+%  \begin{macro}{\filedate}
+%  \begin{macro}{\docdate}
+%  \begin{macro}{\PPOptArg}
+% These definitions must be the first ones in the file.
+%    \begin{macrocode}
+\def\fileinfo{abbreviation macros (Frankenstein's briefs)}
+\def\DoXPackageS {abbrevs}
+\def\fileversion{v1.2}
+\def\filedate{1999/03/08}
+\def\docdate{1999/03/08}
+\edef\PPOptArg {%
+  \filedate\space \fileversion\space \fileinfo
+}
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%
+% If we're loading this file from a \cs\ProcessDTXFile command (see the
+% \package{compsci} package), then \cs\JusTLoaDInformatioN will be defined;
+% othewise we assume it is not (that's why the FunkY NamE).
+% 
+% If we're loading from \cs\ProcessDTXFile, we want to load the packages listed
+% in \cs\DoXPackageS (needed to typeset the documentation for this file) and
+% then bail out.  Otherwise, we're using this file in a normal way as a
+% package, so do nothing.  \cs\DoXPackageS, if there are any, are declared in
+% the \ext{dtx} file, and, if you're reading the typeset documentation of this
+% package, would appear just above.  (It's OK to call \cs\usepackage with an
+% empty argument or \cs\relax, by the way.)
+%    \begin{macrocode}
+\makeatletter% A special comment to help create bst files.  Don't change!
+\@ifundefined{JusTLoaDInformatioN} {%
+  }{% ELSE (we know the compsci package is already loaded, too)
+  \UndefineCS\JusTLoaDInformatioN
+  \SaveDoXVarS
+  \eExpand\csname DoXPackageS\endcsname\In {%use \csname in case it's undefined
+    \usepackage{#1}%
+  }%
+  \RestoreDoXVarS
+  \makeatother
+  \endinput
+}% A special comment to help create bst files.  Don't change!
+%    \end{macrocode}
+%
+% Now we check for \LaTeX2e and declare the LaTeX package.
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{abbrevs}[\PPOptArg]
+%    \end{macrocode}^^A special comment to help create bst files.  Don't change!
+%
+% ^^A NOTE: We have to compensate for the above backslashes, which are not
+% ^^A       actually in the .dtx file the author works on, by adding to the
+% ^^A       CheckSum.
+%%
+% \AddToCheckSum{17}^^A `dtx-update-checksum' automatically handles this.
+% \AddToCheckSum{7}^^A The half a macrocode env. at the top is missed, however...
+% \AddToCheckSum{10}^^A ... and so are the 5 \defs from the .dtx file 
+%                   ^^A     that precede it.
+% \IfCitations {%
+%   \AddToCheckSum{2}^^A When \initelyHavECitationS is defined in
+% }                  ^^A the .dtx file, we need 2 more in the CheckSum.
+%
+%
+% \section{Requirements}
+% 
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\RequirePackage{moredefs,slemph}
+%    \end{macrocode}
+%
+% \section{Basics}
+%
+% Let's begin with the tricky part of inserting space based on context.  The
+% strategy is: first, if the following character is not in \cs\nocorr and the
+% current font is not slanted, insert an italic correction with
+% \cname{sw@slant}; second, if the following character is not in
+% \cs\nospacelist, insert a space.
+%
+% Again, in pseudocode:
+% \begin{codeexample}
+% LET T = the next token
+% IF (slanted font is current AND T NOT IN \nocorrlist)
+%   \sw@slant
+% FI
+% IF T NOT IN \nospacelist
+%   \space
+% FI
+% \end{codeexample}
+%
+% \begin{macro}{\nospacelist}
+%   Put these in the order of their frequency.  Anything in \cs\nocorrlist
+%   should also be in here, most likely.  
+%    \begin{macrocode}
+\newcommand\nospacelist {%
+  ,.':;?-~!)]\bgroup\egroup
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\maybe@ic@space}
+% \begin{macro}{\maybe@ic@space@}
+%   \cname{maybe@ic@space} checks the next character and inserts an italic
+%   correction and space as appropriate.
+%    \begin{macrocode}
+\newcommand\maybe@ic@space {%
+  \futurelet\@let@token\maybe@ic@space@
+}
+%    \end{macrocode}
+%   We first call the kernel's \cname{maybe@ic@}, then our own
+%   \cname{maybe@space@}.
+%    \begin{macrocode}
+\newcommand\maybe@ic@space@ {%
+  \maybe@ic@
+  \maybe@space@
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\maybe@space}
+% \begin{macro}{\maybe@space@}
+%   \cname{maybe@space} and \cname{maybe@space@} are very similar to the
+%   kernel's analogs \cname{maybe@ic} and \cname{maybe@ic@}, but they check
+%   \cs\nospacelist instead of \cs\nocorr.  \cname{t@st@ic} sets
+%   \cname{@tempswa} false if \cname{@let@token} is in \cs\nospacelist.
+%    \begin{macrocode}
+\newcommand\maybe@space {%
+  \futurelet\@let@token\maybe@space@
+}
+\newcommand\maybe@space@ {%
+  \@tempswatrue
+%  \DTypeout{In maybe@space@ my lettoken is [\meaning\@let@token]}%
+  \expandafter   \@tfor
+    \expandafter \reserved@a
+    \expandafter :%
+    \expandafter =%
+                 \nospacelist
+                 \do \t@st@ic
+  \if@tempswa
+    \space
+  \fi
+}
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%
+% \section{Categories}
+%
+% \begin{macro}{\ResetAbbrevs}
+% \begin{macro}{\NewAbbrevCategory}
+% \begin{macro}{\TMResetAll}
+% \begin{macro}{\TMHookAll}
+% \begin{macro}{\TMFontAll}
+%   Each time an abbreviation of category \cat{C} is defined, some tokens are
+%   added to the contents of |\TMReset|\meta{C}.
+%    \begin{macrocode}
+\ReserveCS\TMResetAll
+\ReserveCS\TMHookAll
+\ReserveCS\TMFontAll
+
+\newcommand\NewAbbrevCategory [1] {% args:  category
+  \expandafter\ReserveCS\csname TMReset#1\endcsname
+  \expandafter\ReserveCS\csname TMFont#1\endcsname
+  \expandafter\ReserveCS\csname TMHook#1\endcsname
+  \expandafter\g@addto@macro
+    \expandafter\TMResetAll\csname TMReset#1\endcsname
+}
+\newcommand\ResetAbbrevs [1] {% args: category-list
+  \@for\sc@t@a:=#1\do {%
+    \@ifundefined{TMReset\sc@t@a} {%
+        \FrankenWarning{abbrevs}{The abbreviation category \sc@t@a\space
+                                 is not defined!}%
+      }{% ELSE    
+      \@nameuse{TMReset\sc@t@a}%
+    }%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% 
+% \section{Suffixes}
+%
+% \begin{macro}{\TMInitialSuffix}
+% \begin{macro}{\TMSubsequentSuffix}
+%   When an abbreviation macro is created, two additional commands with these
+%   suffixes are also created.  For example, \cs\foo, \cs\foolong, and
+%   \cs\fooshort.  When abbrevs are used in such a way that ``long'' and
+%   ``short'' don't make sense, it would make sense to change these to
+%   something more descriptive.
+%    \begin{macrocode}
+\newcommand\TMInitialSuffix {%
+  long%
+}
+\newcommand{\TMSubsequentSuffix} {%
+  short%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \section{Plain abbreviations}
+%
+% The checking that \cname{sw@slant} does for skips and penalties on the list
+% is going to be superfluous for the applications I imagine.  But we trade that
+% for a more flexible macro.
+%
+% We don't check for \cs\nocorr or an empty body; maybe we should when it's
+% first defined; but I ran into really hairy expansion troubles trying to do
+% that and use \cs\DeclareRobustCommand.  FIX.
+%
+% \begin{macro}{\TMNewAbbrevPlain}
+%   Things are easy when the abbreviation doesn't switch between initial and
+%   subsequent expansions.
+%    \begin{macrocode}
+\newcommand\TMNewAbbrevPlain [3] {% args: \csname category body
+  \NewRobustCommand #1 {%
+    \@bsphack
+    \TMHookAll
+    \@nameuse{TMHook#2}%
+    \@esphack
+    \ifmmode
+      \def\sc@t@a {%
+        \nfss@text{\@nameuse{TMFont#2}#3}%
+      }%
+    \else
+      \def\sc@t@a {%
+        \leavevmode
+        \begingroup
+%    \end{macrocode}
+% We can skip the check for emptiness and containing just a space, since those
+% won't occur with abbreviation macros except by accident, I think.  We proceed
+% straight to a check for \cs\nocorr{}s.
+%    \begin{macrocode}
+          \tm@check@nocorr #3\nocorr\@nil
+          \TMFontAll
+          \@nameuse{TMFont#2}%
+          \tm@check@left
+          #3%
+          \tm@check@right
+        \endgroup
+      }%
+    \fi
+    \sc@t@a
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\tm@check@nocorr}
+%   This corresponds to the kernel's \cname{check@nocorr@}.  We simply
+%   substitute \cname{maybe@ic@space} and \cname{maybe@space} in where
+%   necessary.  We also use \cname{tm@check@left} and \cname{tm@check@right}
+%   instead of \cname{check@icl} and \cname{check@icr}.
+%    \begin{macrocode}
+\NewName{tm@check@nocorr} {#1#2\nocorr#3\@nil} {%
+  \let\tm@check@left\maybe@ic
+  \def\tm@check@right {\aftergroup\maybe@ic@space}%
+  \def\reserved@a {\nocorr}%
+  \def\reserved@b {#1}%
+  \def\reserved@c {#3}%
+  \ifx\reserved@a\reserved@b
+    \ifx\reserved@c\@empty
+      \let\check@icl\@empty
+    \else
+      \let\check@icl\@empty
+      \def\check@icr {\aftergroup\maybe@space}%
+    \fi
+  \else
+    \ifx\reserved@c\@empty\else
+      \def\tm@check@right {\aftergroup\maybe@space}%
+    \fi
+  \fi
+}
+%    \end{macrocode}
+%  \end{macro}
+%
+% \section{Control booleans}
+%
+% \begin{macro}{\ifTMInhibitSwitching}
+% \begin{macro}{\TMInhibitSwitchingtrue}
+% \begin{macro}{\TMInhibitSwitchingfalse}
+% \begin{macro}{\ifTMAlwaysLong}
+% \begin{macro}{\TMAlwaysLongtrue}
+% \begin{macro}{\TMAlwaysLongfalse}
+%   Control booleans.
+%    \begin{macrocode}
+\newboolean{TMInhibitSwitching} % initially false
+\newboolean{TMAlwaysLong}       % initially false
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%  \end{macro}
+%
+% \section{Switching abbreviations}
+%
+% \vspace{7ex}^^A kludge to handle all those macro names 
+% \begin{macro}{\TMNewAbbrevSwitcher}
+%   Here is the main abbreviation macro definer.  It works by defining two
+%   macros, one for the initial text and one for the subsequent text, and
+%   setting up a third user command to choose between the two as appropriate.
+%   (The first two are made available to the user by explicit call as well.)
+%   The function used to define the two macros is passed as the first argument
+%   to this function.  Supplied definers are \cs\TMNewAbbrevPlain (I will
+%   write \cs\TMNewAbbrevWork and \cs\TMNewAbbrevDotclose soon FIX).  The
+%   second argument is the category---each definer takes at least three
+%   arguments: a command name, a category, and the content.  The third argument
+%   is the user macro name to be created, and the fourth and fifth arguments
+%   are the initial and subsequent expansion texts.
+%
+%   The first part sets three token variables to the three command sequences
+%   that this macro is going to define---the user, initial, and subsequent
+%   commands.  The user command checks its associated boolean variable to see
+%   whether it has been called before.  If so, it calls the ``subsequent''
+%   macro; if not, the ``initial'' macro.
+%
+%    \begin{macrocode}
+\newcommand\TMNewAbbrevSwitcher [5] {% args: definer category csname 
+%                                    %       initial subseq.
+  \expandafter#1\csname #3\TMInitialSuffix\endcsname{#2}{#4}
+  \expandafter#1\csname #3\TMSubsequentSuffix\endcsname{#2}{#5}
+  \newboolean{@#3@mentioned}
+  \expandafter\g@addto@macro\csname TMReset#2\endcsname {%
+    \global\csname @#3@mentionedfalse\endcsname
+  }
+%    \end{macrocode}
+%   We've created the initial and subsequent macros, and the boolean.  Now we
+%   define the user macro.  This definition is tricky.  In pseudocode, it looks
+%   like this:
+% \begin{codeexample}
+% if #3 definable then
+%   #3 := { if (#3-mentioned AND NOT TMAlwaysLong) then
+%             #3-short
+%           else 
+%             if NOT TMInhibitSwitching then #3-mentioned := (global) true
+%             #3-long
+%           fi }
+% fi
+% \end{codeexample}
+% I'm not sure this is any more readable than a sea of
+% \cs\expandafter\cs\noexpand{}s.
+%
+% Notice that in a switching abbrev, the -mentioned boolean is set to true
+% \emph{before} calling the macro itself, so that the hook can check and
+% possibly alter the value.  See the \cs\TMAcroDefiner definer in the
+% configuration file for a use of this.
+%    \begin{macrocode}
+  \expandafter\@ifdefinable\csname #3\endcsname {%
+%                is ##1 below:
+    \EExpand\csname #3\endcsname\In {%
+%                   ####1:
+    \EExpand\csname if@#3@mentioned\endcsname\In {%
+%                   ########1:
+    \EExpand\csname #3\TMSubsequentSuffix\endcsname\In {%
+%                   ################1:
+    \EExpand\csname @#3@mentionedtrue\endcsname\In {%
+%                   ################################1:
+    \EExpand\csname #3\TMInitialSuffix\endcsname\In {%
+%     \gdef\<csname>{%
+      \gdef ##1{%  must be NO SPACE before `{' !                      
+        \@tempswafalse
+%       \if@<csname>mentioned
+        ####1%                         
+          \ifTMAlwaysLong\else
+            \@tempswatrue
+          \fi
+        \fi
+        \if@tempswa
+%         \def\sc@t@a {\<csname>\TMSubsequentSuffix}%
+          \def\sc@t@a {########1}%
+        \else
+          \ifTMInhibitSwitching\else
+%           \global\@<csname>@mentionedtrue
+            \global ################1%
+          \fi
+%         \def\sc@t@a {\<csname>\TMInitialSuffix}%
+          \def\sc@t@a {################################1}%
+        \fi
+        \sc@t@a
+      }%   close \gdef
+    }}}}}% close \EExpand...\In's
+  }%       close \@ifdefinable
+} 
+%    \end{macrocode}
+% \caveat{The \cs\csname{}s (e.g., either \cs\foolong or \cs\fooshort)
+% \emph{must} be the very last thing to occur in the definitions, or the
+% \cs\futurelet that checks following spacing in, e.g., \cs\TMNewAbbrevPlain
+% will break.  This is why we use the construction with \cname{sc@t@a}.  No
+% space must sneak into the macros, either!}
+% \end{macro}
+%
+% The hard work is done.  Now we define some macros to help create new
+% categories.
+%
+% \section{Defining commands}
+%
+% A \meta{definer} is always called with a category as a first argument.  There
+% is only one definer in this package, though another is given in the
+% distributed configuration file. 
+%
+% \begin{macro}{\TMDefineAbbrevStandard}
+% \begin{macro}{\tm@defineabbrevstandard}
+%   \cs\TMDefineAbbrevStandard is the standard \meta{definer} that makes the
+%   choice between defining an switching or a plain abbreviation, depending on
+%   whether the user supplies a subsequent text.
+%    \begin{macrocode}
+\newcommand\TMDefineAbbrevStandard [3] {% args: category \csname 
+                                        %       initial [subsequent]
+  \@ifnextchar [ {%
+      \tm@defineabbrevstandard{#1}{#2}{#3}%
+    }{% ELSE
+    \TMNewAbbrevPlain{#2}{#1}{#3}%
+  }%
+}
+\NewName{tm@defineabbrevstandard} {#1#2#3[#4]} {% args: category \csname 
+                                                %       initial subsequent
+  \eExpand\expandafter\Gobble\string#2\In {%
+    \TMNewAbbrevSwitcher\TMNewAbbrevPlain{#1}{##1}{#3}{#4}%
+  }%
+}
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%
+% \begin{macro}{\NewUserAbbrevDefiner}
+% \begin{macro}{\tm@newuserabbrevdefiner}
+%   \mbox{} 
+%    \begin{macrocode}
+\newcommand\NewUserAbbrevDefiner [2] {% args: \csname category [definer]
+  \@ifnextchar [ {%
+      \tm@newuserabbrevdefiner{#1}{#2}%
+    }{% ELSE
+    \tm@newuserabbrevdefiner{#1}{#2}[\TMDefineAbbrevStandard]%
+  }%
+}
+\NewName{tm@newuserabbrevdefiner}{#1#2[#3]} {% args: \csname category definer
+  \newcommand #1 {%
+    #3{#2}%
+  }%
+}
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%
+% \section{Basic categories}
+%
+% \begin{macro}{\TMResetGeneric}
+% \begin{macro}{\TMResetName}
+% \begin{macro}{\TMResetBook}
+% \begin{macro}{\TMResetWork}
+% \begin{macro}{\TMHookGeneric}
+% \begin{macro}{\TMHookName}
+% \begin{macro}{\TMHookBook}
+% \begin{macro}{\TMHookWork}
+% \begin{macro}{\TMFontGeneric}
+% \begin{macro}{\TMFontName}
+% \begin{macro}{\TMFontBook}
+% \begin{macro}{\TMFontWork}
+% \begin{macro}{\newabbrev}
+% \begin{macro}{\newname}
+% \begin{macro}{\newbook}
+% \begin{macro}{\newwork}
+%    Right now, the \cat{Book} and \cat{Work} categories are separate but
+%    equal.  A future revision will distinguish them by keeping track of more
+%    information about \cat{Work}s, with the idea of using them to generate a
+%    separate bibliography and index in a long document that refers to a
+%    certain list of books by short titles.  E.g., my thesis is on Samuel
+%    Beckett, and I want to refer to his works by short titles, and
+%    automatically generate a Beckett bibliography of only the ones I use,
+%    listed by title.
+%    \begin{macrocode}
+\NewAbbrevCategory{Generic}
+\NewAbbrevCategory{Name}
+\NewAbbrevCategory{Book}
+\NewAbbrevCategory{Work}
+\NewUserAbbrevDefiner{\newabbrev}{Generic}
+\NewUserAbbrevDefiner{\newname}{Name}
+\NewUserAbbrevDefiner{\newbook}{Book}
+\NewUserAbbrevDefiner{\newwork}{Work}
+
+\def\TMFontBook {%
+  \itswitch
+}
+\def\TMFontWork {%
+  \itswitch
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \section{Date marks}
+%
+% \begin{macro}{\DateMark}
+% \begin{macro}{\DateMarkSize}
+%   \mbox{}
+%    \begin{macrocode}
+\newcommand\DateMark [1] {%
+  \hspace{.2em}{\DateMarkSize\scshape #1}%
+  \@ifnextchar. {%
+      \spacefactor\@m
+    }{% ELSE
+    .\maybe@ic@space
+  }%
+}
+\newlet\DateMarkSize\small
+%    \end{macrocode}
+%  \end{macro}
+%  \end{macro}
+%
+% \begin{macro}{\PM}
+% \begin{macro}{\AM}
+% \begin{macro}{\BC}
+% \begin{macro}{\AD}
+%   Some common time abbreviations.
+%    \begin{macrocode}
+\newcommand{\PM} {%
+  \DateMark{p.m}%
+}
+\newcommand{\AM} {%
+  \DateMark{a.m}%
+}
+\newcommand{\BC} {%
+  \DateMark{b.c}%
+}
+\newcommand{\AD} {%
+  \DateMark{a.d}%
+}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \part{Configuration}
+%
+% We've built up the groundwork and leave the definitions of useful things to
+% the configuration file.
+%    \begin{macrocode}
+\InputIfFileExists{abbrevs.cfg}{}{}
+%    \end{macrocode}
+%
+%  The contents of the distributed configuration file are below.
+%
+% \InputIfFileExists{abbrevs.cfg}{}{}
+% 
+% \Finale

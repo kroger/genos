@@ -1,0 +1,49 @@
+\usepackage{ucs}
+\usepackage[utf8,utf8x]{inputenc}
+\usepackage[brazil]{babel}
+%\usepackage{notas}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{float}
+%\usepackage{listings}
+\usepackage{fancyvrb}
+%\usepackage{beramono}
+\usepackage[top=25mm,bottom=25mm,left=30mm,right=30mm]{geometry}
+%% para bold tt
+\DeclareFontShape{OT1}{cmtt}{bx}{n}{
+  <5><6><7><8><9><10><10.95><12><14.4><17.28><20.74><24.88>cmttb10}{}
+
+\newfloat{example}{htop}{lox}
+\floatname{example}{Exemplo}
+
+\fvset{commandchars=\\\{\},codes={\catcode`\$=3\catcode`^=7}}
+
+\newcommand{\eng}[1]{\textit{#1}}
+\newcommand{\prog}[1]{\textsf{#1}}
+\newcommand{\name}[1]{\texttt{#1}}
+\newcommand{\conceito}[1]{{\sf #1}}
+\newcommand{\sigla}[1]{{\sc #1}}
+\newcommand{\opc}[1]{{\tt #1}}
+\newcommand{\ling}[1]{{\it #1}}
+\newcommand{\code}[1]{{\tt #1}}
+\newcommand{\ang}[1]{``{#1}''}
+
+\newenvironment{exemplo}
+{\begin{example}\small}
+{\end{example}}
+
+% \lstset{
+%   extendedchars=false,
+%   float,
+%   showstringspaces=false,
+%   tabsize=4,
+%   commentstyle=\itshape,
+%   basicstyle=\ttfamily,
+%   language=Lisp,
+%   moredelim=[is][\underbar]{|}{|},
+%   moredelim=[is][\underbar]{;; },
+%   morekeywords={lambda}
+% }
+
+\newcommand{\aviso}{\textbf{[ATENÇÃO: essa seção contém apenas um
+    rascunho inicial]}}

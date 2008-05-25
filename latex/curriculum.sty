@@ -1,0 +1,107 @@
+%\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=15mm,bmargin=15mm,lmargin=20mm,rmargin=15mm}
+\usepackage[brazil]{babel}
+\usepackage{makeidx}
+\usepackage{achicago}
+\setlength\parskip{\smallskipamount}
+\setlength\parindent{0pt}
+ \RequirePackage{ifthen}
+
+\newenvironment{descricao-musicas}
+ {\begin{list}
+  {}% no text if no optional argument to \item
+  {\topsep 0 ex
+   \itemsep 1 ex
+   \labelwidth 1.3 in
+   \labelsep 0 in
+   \leftmargin 1.3 in
+   \rightmargin 0 in
+   \parsep -10 pt
+   \listparindent 0 in
+   \let\makelabel\makelbl
+   }
+  }
+ {\end{list}}
+
+\newenvironment{descricao}
+ {\begin{list}
+  {}% no text if no optional argument to \item
+  {\topsep 0 ex
+   \itemsep 2 ex
+   \labelwidth 1.5 in
+   \labelsep .8 in
+   \leftmargin 2.5 in
+   \rightmargin 0 in
+   \parsep 1 pt
+   \listparindent 0 in
+   \let\makelabel\makelbl
+   }
+  }
+ {\end{list}}
+
+\newenvironment{lista-data}
+ {\begin{list}
+  {}% no text if no optional argument to \item
+  {\topsep 0 ex
+   \itemsep 1 ex
+   \labelwidth .8 in
+   \labelsep 0 in
+   \leftmargin 1.1 in
+   \rightmargin 0 in
+   \parsep 2 pt
+   \listparindent 0 in
+   \let\makelabel
+   }
+  }
+ {\end{list}}
+
+\newcommand*\makelbl[1]{\normalfont\bfseries #1}
+
+\newcommand{\musicas}[8]{ 
+  \vbox
+  {
+    {\par \vspace{5mm} \it {\large {#1}}\\}
+    {{#2}, {#3}}
+    {\begin{descricao-musicas}
+        {\item[Instrumentação:] {#4}}
+      \end{descricao-musicas}}
+
+    \ifthenelse{\equal{#5}{}}
+%then
+    {}
+%else
+    {
+      {\begin{descricao-musicas}
+        \item[Estréia:]  {{#5}, {#6}}
+        \end{descricao-musicas}}
+      {\begin{descricao-musicas}
+        \item {\it {#7}}
+        \end{descricao-musicas}}
+      }%fim do else
+    }%fim do vbox
+  }%fim
+
+
+\newcommand{\MainWorks}[6]{
+\vbox{
+{\par \vspace{5mm} {\it {\Large {#1}}} ({#3}) -  {#4} }
+}}
+
+\newcommand{\concursos}[4]{
+  \begin{lista-data}
+  \item[{#1}] {#2} - {\bf {#3}} \\
+    {\it {#4}} \end{lista-data}}
+
+\newcommand{\bolsas}[4]{
+  \begin{lista-data} \item[{#1}] {#2} {\it
+      {#3}} {Orientador: {#4}} \end{lista-data} }
+
+\newcommand{\linha}[1]{ {#1 \hrule width \columnwidth \vspace{1ex}}}
+
+\newcommand{\capa}[3]{
+\begin{titlepage}
+\linha {{\Huge \bf {#1}} \\}
+\Large \it {#2} \hfill {#3} \end{titlepage}
+}

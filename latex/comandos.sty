@@ -1,0 +1,79 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{comandos}
+\RequirePackage{abbrevs}
+%\RequirePackage[nofancy]{rcsinfo}
+\usepackage[draft]{fixme}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{draftcopy}
+\usepackage{fancyvrb}
+\usepackage{url}
+\draftcopyName{}{0}
+
+
+\newcommand{\programa}[3]{
+\paragraph{{#1}}
+\nopagebreak
+\begin{quote}
+  \input{#2}\cite{#3}
+\end{quote}
+}
+
+\newname{\orcs}{\opc{orquestras}}[orquestras]
+\newname{\Orcs}{\opc{Orquestras}}[Orquestras]
+\newname{\scos}{\opc{partituras}}[partituras]
+\newname{\Scos}{\opc{Partituras}}[Partituras]
+\newname{\orc}{\opc{orquestra}}[orquestra]
+\newname{\Orc}{\opc{Orquestra}}[Orquestra]
+\newname{\sco}{\opc{partitura}}[partitura]
+\newname{\Sco}{\opc{Partitura}}[Partitura]
+
+\newcommand{\Identado}{\setlength\parindent{1cm}}
+\newcommand{\NaoIdentado}{\setlength\parindent{0cm}}
+
+\newcommand{\Titulo}[1]{{\center \Large  {#1} \par}\vspace{2cm}}
+
+\setlength\parskip{\smallskipamount}
+
+\makeatletter
+\newcommand{\printtitle}{
+\@title
+}
+
+\newcommand{\printauthor}{
+\@author
+}
+\makeatother
+
+\newcommand{\printaddress}{
+Escola de Música da UFBA \\
+Parque Universitário Edgard Santos, Canela \\
+Salvador, Bahia \\
+40150-480 \\
+Telefone: (071) 337 1723 \\
+Fax: (071) 336 7421 ou 337 1723 \\
+E-mail: kroger@e-net.com.br e kroger@ufba.br
+}
+
+\newcommand{\figura}[4][scale=1,angle=0]{
+  \begin{figure}[htbp]
+    \centering
+    {\includegraphics[#1]{#2}}
+    \caption{#3}
+    \label{#4}
+  \end{figure}
+  }
+
+\newcommand{\aviso}[1]{\marginpar{\textcolor{red}{#1}}}
+
+\DeclareOption{musica}{%
+ RequirePackage{simbolosMusicais}
+}
+
+\DeclareOption{draft}{%
+  \draftcopyName{DRAFT}{180}
+ }
+
+\ProcessOptions\relax
+

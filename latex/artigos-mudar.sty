@@ -1,0 +1,573 @@
+%%% -*-LaTeX-*-
+%%% artigos.sty -- package com definições e packages usados em
+%%% artigos. Esse arquibooko foi baseado no LaTeX demo do Klaus Jessen
+%%% $Id: artigos.sty,v 1.2 2001/05/08 13:35:09 kroger Exp $
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{artigos}
+
+%\RequirePackage{kchicago}
+%%% define a macro \ifpdf para compilação condicional.  Desse modo é
+%%% possível definir blocos que só são processados na versão PDF ou na
+%%% versão DVI/PS.
+\newif\ifpdf
+  \ifx\pdfoutput\undefined
+  \pdffalse
+\else
+  \pdfoutput=1
+  \pdftrue
+\fi
+
+%-----------------------
+%\usepackage{latexsym}
+%\usepackage{epsfig}
+%\usepackage{html}
+%-----------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% o package inputenc adiciona suporte a caracteres ISO-8859-1
+%%% diretamente no arquivo, sem necessidade de construções como \c{c}.
+%%%
+%%% Usando GNU Emacs voce pode gerar estes caracteres adicionando no
+%%% seu arquivo .emacs
+%%% (add-hook 'LaTeX-mode-hook
+%%%          (lambda ()
+%%%          (load-library "iso-acc")
+%%%          (standard-display-european 1)
+%%%          (iso-accents-mode 1)
+%%%          (iso-accents-customize "portuguese")
+%%%          (auto-fill-mode 1)
+%%%          ))
+%%%
+%%% Se você possui arquivos .tex e deseja converte-lo para formato
+%%% ISO-8859-1 pode usar:
+%%%
+%%% recode -d LaTeX:l1 file.tex
+%%%
+%%% GNU recode esta'disponivel em:
+%%% ftp://prep.ai.mit.edu/pub/gnu/recode/recode-3.4.tar.gz
+%%%
+\RequirePackage[latin1]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Uso de Font Encoding T1
+%%%
+%%% Se o encoding de uma fonte não provê acesso direto a caracteres
+%%% acentuados, (como é o caso do encoding OT1, default do LaTeX) então o
+%%% TeX gera estes caracteres sobrepondo o caracter base mais o caracter
+%%% do acento.  O algoritmo de hifenização, contudo, não hifeniza palavras
+%%% formadas dessa forma.
+%%%
+%%% Se o encoding de uma fonte já provê acesso direto a caracteres
+%%% acentuados, como o encoding T1, estes caracteres são usados
+%%% diretamente sem prejuízo do algoritmo de hifenização.  O uso de encoding
+%%% T1 é fundamental para a correta hifenização em Português.
+%%%
+%%% Notar que trata-se da mesma fonte, por default a Computer Modern,
+%%% apenas o que muda é o seu encoding, isto é, a ordem/disponibilidade
+%%% dos caracteres dentro da mesma.
+%%%
+%%% No caso de PDF, usando-se pdflatex, o uso de fontes CM Type 1
+%%% com encoding T1 ainda não está disponível.  O uso de
+%%% \usepackage[T1]{fontenc} com o pdflatex resulta em fontes
+%%% bitmapped que ficam horríveis na tela.  A solução é usar o package
+%%% ae (Almost European Computer Modern) que simula o encoding T1
+%%% mantendo o uso de fontes Type 1.
+
+\ifpdf
+\RequirePackage{ae}
+\else
+\RequirePackage[T1]{fontenc}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Suporte para gerar o documento em Inglês e Português.  A última
+%%% opção (brazil) é considerado o idioma default do documento.
+\RequirePackage[american,english,brazil]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Índice Remissivo
+\RequirePackage{makeidx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Glossário
+\RequirePackage{makeglo}
+
+%%% Nome do Glossário em Português
+\renewcommand{\glossaryname}{Glossário}
+%%% largura da coluna de entradas do glossário
+\renewcommand{\glossmaxlabelwidth}{\hspace{2cm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Para inclusão de gráficos
+\ifpdf
+\RequirePackage[pdftex]{graphicx}
+\else
+\RequirePackage[dvips]{graphicx}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Para controlar a hifenização
+%\usepackage[htt]{hyphenat}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% produção de material em landscape
+\ifpdf
+\RequirePackage[pdftex]{lscape}
+\else
+\RequirePackage[dvips]{lscape}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% indenta primeiro parágrafo, estilo brasileiro.
+\RequirePackage{indentfirst}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package subfigure --- Figuras dentro de figuras
+\RequirePackage{subfigure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package wrapfig --- Figuras e tabelas ao lado de texto
+\RequirePackage{wrapfig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% dimensões da página
+\ifpdf
+\RequirePackage[pdftex]{geometry}
+\else
+\RequirePackage[dvips]{geometry}
+\fi
+
+%%% Usa página tamanho `A4'.  Para produzir esse documento em
+%%% tamanho `letter', comente o comando abaixo e descomente o comando
+%%% seguinte, que usa o tamanho `letterpaper'.
+%\geometry{a4paper,left=1in,right=1in,top=1in,bottom=1in}
+
+%%% Usa página tamanho `letter'.  Para produzir esse documento em
+%%% tamanho `A4', comente o comando abaixo e descomente o comando
+%%% acima, que usa o tamanho `a4paper'.
+%\geometry{letterpaper,left=1in,right=1in,top=1in,bottom=1in}
+
+% a linha abaixo mostra com detalhes várias medidas empregadas no
+% documento.
+%\geometry{verbose,a4paper,left=1in,right=1in,top=1in,bottom=1in}
+
+% outros exemplos de uso com \geometry
+%\geometry{a4paper,left=1cm,right=1cm,top=2cm,bottom=2cm,nohead,nofoot}
+%\geometry{letterpaper,left=1cm,right=1cm,top=2cm,bottom=2cm,nohead}
+%\geometry{a4paper,verbose,left=1cm,right=1cm,top=2cm,bottom=2cm,noheadfoot}
+%\geometry{a4paper,left=1in,right=1in,top=1in,bottom=1in}
+%\geometry{a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm,nohead}
+
+% o package a4wide pode ser usado no lugar do geometry
+%\RequirePackage{a4wide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Mostra ao lado de cada página os \index usados
+%%% Útil para proofreading
+%\RequirePackage{showidx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package url
+\RequirePackage{url}
+
+\newcommand{\email}{\begingroup \urlstyle{tt}\Url}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package alltt
+\RequirePackage{alltt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% suporte para múltiplas colunas
+\RequirePackage{multicol}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package ulem
+%%% a oção ``normalem'' faz com que \emph{} continue com seu
+%%% comportamento normal de produzir texto em itálico.  Caso não
+%%% especificado todos os \emph{} produzirão texto sublinhado.
+\RequirePackage[normalem]{ulem}
+
+%%% Os comandos a seguir, \dotuline e \dashuline não fazem parte do
+%%% package ulem, mas foram definidos usando primitivas desse
+%%% package. Esses comandos foram sugeridos por Donald Arseneau em um
+%%% post para o Newsgroup ``comp.text.tex''.
+
+\def\dotuline{\bgroup
+  \ifdim\ULdepth=\maxdimen  % Set depth based on font, if not set already
+  \settodepth\ULdepth{(j}\advance\ULdepth.4pt\fi
+  \markoverwith{\begingroup
+  \advance\ULdepth0.08ex
+  \lower\ULdepth\hbox{\kern.15em .\kern.1em}%
+  \endgroup}\ULon}
+
+\def\dashuline{\bgroup
+  \ifdim\ULdepth=\maxdimen  % Set depth based on font, if not set already
+  \settodepth\ULdepth{(j}\advance\ULdepth.4pt\fi
+  \markoverwith{\kern.15em
+  \vtop{\kern\ULdepth \hrule width .3em}%
+  \kern.15em}\ULon}
+
+\RequirePackage{color}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package setspace
+\RequirePackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package float -- permite maior controle sobre posicionamento de
+%%% floats (posicionador [H]), além de criação de novos tipos de
+%%% floats.  Neste documento é criado o float ``codigo''.
+\RequirePackage{float}
+
+\floatstyle{plain}  %%% tipos: plain, boxed, ruled
+\newfloat{codigo}{tbp}{lop}
+%\newfloat{codigo}{tbp}{lop}[section]  %%% numera os captions com
+                                       %%% número de seção.
+\floatname{codigo}{Código}
+
+%%% nome para ser usado no sumário
+\newcommand{\listofcodename}{Lista de Código}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Escolhendo a fonte a ser usada no texto através de pacotes
+\input{artigos-fontes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Packages para símbolos especiais
+
+%%% ZapfDingbats font
+\RequirePackage{pifont}
+
+\ifpdf
+\else
+%%% Text Companion Fonts -- nem todas as fontes desse package estão
+%%% disponíveis em formato Type 1 -- obrigando o uso de fontes
+%%% bitmapped em seu lugar.  Em documentos PDF o uso de fontes
+%%% bitmappep definitivamente deve ser evitado -- o resultado quando
+%%% visualizado na tela é muito ruim.  Decidiu-se então não usar esse
+%%% package na versão PDF desse documento.
+\RequirePackage{textcomp}
+\fi
+
+%%% wasy fonts
+\RequirePackage{wasysym}
+
+%%% AMS fonts
+\RequirePackage{amsfonts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Package amstext -- define a macro \text que permite a inclusão de
+%% texto em math mode, inclusive em sub/superscripts.  É bastante
+%% conveniente também para a geração de acentos, que podem ser usados
+%% diretamente.
+\RequirePackage{amstext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% o package fancyvrb foi copiado para junto dos demais arquivos que
+%%% compõem este demo.  Não é necessário que ele esteja instalado no
+%%% sistema para funcionar.
+%\RequirePackage{fancyvrb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package texnames -- define macros para os nomes de vários
+%%% programas relacionados com TeX e METAFONT, a saber:
+%%%
+%%% \AMSTEX, \AMSTeX, \AmSTeX
+%%% \BIBTEX, \BIBTeX, \BibTeX
+%%% \LAMSTeX, \LAmSTeX
+%%% \LaTeX, \LATEX
+%%% \METAFONT, \MF
+%%% \SLITEX, \SLITeX, \SLiTeX, \SliTeX
+\RequirePackage{texnames}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package varioref -- implementa os comandos \vref e \vpageref.
+\RequirePackage[brazil]{varioref}
+
+%%% As strings apresentadas podem ser customizadas alterando-se as
+%%% definições abaixo:
+
+%\def\reftextfaceafter {na \reftextvario{p\'agina oposta}{pr\'oxima
+%                       p\'agina}}%
+%\def\reftextfacebefore{na p\'agina \reftextvario{oposta}{anterior}}%
+%\def\reftextafter     {na \reftextvario{p\'agina seguinte}{pr\'oxima
+%                       p\'agina}}%
+%\def\reftextbefore{na p\'agina \reftextvario{anterior}{precedente}}%
+%\def\reftextcurrent   {\reftextvario{nesta p\'agina}{na p\'agina
+%                       corrente}}%
+%\def\reftextfaraway#1{na p\'agina~\pageref{#1}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package longtable -- suporte para tabelas com mais de uma página.
+\RequirePackage{longtable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package psfrag -- suporte para superposição de texto do \LaTeX em
+%%% figuras PostScript.  Carregado somente na versão DVI/PS.
+
+\ifpdf
+\else
+\RequirePackage{psfrag}
+\newcommand{\psf}{\textsf{PSfrag}}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package mathrsfs -- define o comando \mathscr, usado no símbolo
+%%% das transformadas de Fourier e Laplace.
+\RequirePackage{mathrsfs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package enumerare -- extensão ao environment enumerate.
+\RequirePackage{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package musixtex -- para inserir alguns simbolos musicais. Para
+%%% exemplos mais complexos usar o lilypond.
+%\RequirePackage{musixtex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% packages algorithm e algorithmic -- para uso com algoritmos.
+%\RequirePackage{algorithm}
+%\RequirePackage{algorithmic}
+
+%\makeatletter
+%\renewcommand{\ALG@name}{Algoritmo}
+%\makeatother
+%\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package lastpage -- define o label LastPage
+\RequirePackage{lastpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% package hyperref (incluído apenas na versão PDF)
+
+%\ifpdf
+%\RequirePackage{hyperref}
+%\hypersetup{pdfpagemode=UseOutlines,linkcolor=false,linkbordercolor=none,pageanchor=true,bookmarks=true,colorlinks=false}
+%\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% definição do comando \gnuplotinput -- desativa o caracter ",
+%%% inclui a figura e ativa o caracter " novamente.
+
+%%% Para o package babel alguns caracteres podem ter significado especial,
+%%% considerados ``ativos''.  No caso de Português, " (aspas) é um destes
+%%% caracteres.
+%%%
+%%% Na inclusão de figuras geradas com gnuplot, " pode ocorrer dentro do
+%%% comando \special.  Neste caso é preciso desabilitar seu significado
+%%% especial, reabilitando-o após a inclusão da figura.  Na versao 3.5
+%%% do package babel isso não é necessário, mas na versão 3.6
+%%% isso é obrigatório, sob pena de erro na inclusão da figura.
+
+\def\mdqon{\catcode`\"\active}   %make double quotes on
+\def\mdqoff{\catcode`\"12\relax} %make double quotes off
+
+\newcommand{\gnuplotinput}[1]{%
+\mdqoff
+\input{#1}
+\mdqon}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% definição de comandos com \newcommand
+
+%%% É extremamente importante que macros sejam criadas para cada
+%%% ``classe'' de palavras que desejemos usar com alguma modificação
+%%% de fonte, estilo, etc.  Se mais tarde resolvermos mudar a
+%%% convenção basta mudarmos a definição da macro.  Isso é muito mais
+%%% eficiente do que sairmos procurando no documento inteiro por todas
+%%% os lugares que usamos \textit{}, por exemplo.  Uso de macros como
+%%% descrito ajuda a mantermos notações coerentes em todo o
+%%% documento.  Pode ajudar também na indexação de palavras, uma vez
+%%% que podemos incluir na própria definição da macro o comando
+%%% \index{}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% produz ordinal masculino ou feminino dependendo do segundo
+%% argumento.  Por exemplo:
+%% \ordinal{1}{a} Semana
+%% \ordinal{1}{o} Encontro
+\newcommand{\ordinal}[2]{%
+#1%
+\ifthenelse{\equal{a}{#2}}%
+{\textordfeminine}%
+{\textordmasculine}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Imprime temperatura.  No caso Celsius ou Fahrenheit ([C] ou [F])
+%% imprime símbolo de graus.  No caso de de Kelvin ([K]) não imprime o
+%% símbolo de graus.  Por exemplo:
+%% \temp{100} -- o default é Celsius, imprime 100^\circ C
+%% \temp[F]{180} -- imprime 180^\circ F
+%% \temp[K]{373} -- imprime 373 K
+\newcommand{\temp}[2][C]{%
+\ifthenelse{\equal{#1}{K}}%
+{\ensuremath{#2\,\mathrm{#1}}}%
+{\ensuremath{#2^\circ\,\mathrm{#1}}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Traça um quadro cercando um ou mais parágrafos.
+\newlength{\squareboxwidth}
+\newenvironment{squarebox}{%
+  \setlength{\squareboxwidth}{\linewidth}
+  \addtolength{\squareboxwidth}{-12pt}
+  \begin{center}
+    \begin{tabular}{|c|}
+      \hline
+      \begin{minipage}{\squareboxwidth}
+        \medskip
+}
+{
+  \medskip
+\end{minipage}
+\\ \hline
+\end{tabular}
+\end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% environment ``Citation'', com um contador de citações.
+%%% Adaptado de um exemplo do LaTeX Companion, pg. 443--444.
+\newcounter{Citctr}
+\newsavebox{\Citname}
+\newenvironment{Citation}[1]
+{\stepcounter{Citctr}%
+  \sbox{\Citname}{\textit{#1}}
+  \begin{description}\item[Citation \arabic{Citctr}] \mbox{}\\
+}
+{\hspace*{\fill}\nolinebreak[1]\hspace*{\fill}%
+\usebox{\Citname}\end{description}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% environment ``Description'', similar ao environment
+%%% ``description'', mas com maior controle sobre a tabulação das
+%%% entradas e de suas descrições.
+%%% Adaptado de um exemplo do LaTeX Companion, pg. 64.
+
+\newlength{\myentrylen}
+\newenvironment{Description}[1]%
+{\list{}
+  {\settowidth{\labelwidth}{\textbf{#1}}%
+    \leftmargin\labelwidth\advance\leftmargin\labelsep%
+    \renewcommand{\makelabel}[1]{%
+      \settowidth{\myentrylen}{\textbf{##1}}%
+      \ifthenelse{\lengthtest{\myentrylen > \labelwidth}}%
+      {\parbox[b]{\labelwidth}%
+        {\makebox[0pt][l]{\textbf{##1}}\\\mbox{}}}
+      {\textbf{##1}}%
+      \hfill\relax%
+      }
+}}
+{\endlist}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% environment ``codeverbatim'' usado para mostrar fragmentos de
+%%% código LaTeX.
+%%%
+%%% O environment verbatim padrão do LaTeX não pode ser
+%%% usado na definição de novos environments.  Deste modo é usado
+%%% \VerbatimEnvironment e environment Verbatim definido no package fancyvrb.
+
+\newenvironment{codeverbatim}{%
+\VerbatimEnvironment
+\small
+\begin{Verbatim}[xleftmargin=20mm]}
+{\end{Verbatim}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% environment ``exercicio'' usado na seção counters como exemplo de
+%%% um environment que usa counters.
+%%%
+%%% Dois counters são definidos: exemajor e exeminor.
+
+\newcounter{exemajor}
+\newcounter{exeminor}
+
+\newenvironment{exercicio}{%
+\begin{list}{\arabic{exemajor}.\arabic{exeminor}}
+{\usecounter{exeminor}\stepcounter{exemajor}}}
+{\end{list}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% análogo ao anterior, mas usa a numeração de section dentro de cada
+%%% série de exercícios.
+%\newenvironment{exercicio}{%
+%\begin{list}{\arabic{section}.\arabic{exeminor}}
+%{\usecounter{exeminor}}}
+%{\end{list}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% define um epígrafo para exibição de frases/pensamentos na abertura
+%%% de uma seção/capítulo.
+\newcommand{\epigraph}[2]{%
+\vspace{1ex}%
+ {\footnotesize%
+ \begin{flushright}%
+ \begin{minipage}{.6\textwidth}%
+ #1
+ \end{minipage}\\
+ \textit{#2}%
+ \end{flushright}}%
+\vspace{1ex}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Reserva mais espaço para entradas com número de
+%%% seção/subseção muito longas, como por exemplo `15.13'.
+
+\makeatletter
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.5em}{2.6em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{4.1em}{3.2em}}
+\makeatother
+
+%%% Used by GNU Emacs and AUC TeX.
+%%% Local Variables:
+%%% TeX-master: "demo.tex"
+%%% TeX-auto-save: t
+%%% End:
+
+%%% demo.sty ends here.
+
+\RequirePackage{abbrevs}
+\RequirePackage{comandos}
+\RequirePackage{blkcntrl}
+\RequirePackage{fancyhdr}
+\RequirePackage[nofancy]{rcsinfo}
+\RequirePackage{times}
+\usepackage{draftcopy}
+\draftcopyName{}{0}
+
+\pagestyle{plain}
+
+\DeclareOption{musica}{%
+ RequirePackage{simbolosMusicais}
+}
+
+\DeclareOption{draft}{%
+  \draftcopyName{DRAFT}{180}
+ }
+
+\DeclareOption{rcs}{%
+  \pagestyle{fancyplain}
+  \fancyhead{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancyfoot[C]{\thepage} 
+   \fancyfoot[L]{\rcsInfoFile}
+   \fancyfoot[R]{[Rev. \rcsInfoRevision\,] \rcsInfoLongDate}
+}
+
+\DeclareOption{academico}{%
+% Margens Acadêmica
+\geometry{verbose,a4paper,tmargin=20mm,bmargin=20mm,lmargin=20mm,rmargin=20mm}
+%\PassOptionsToClass{10pt,twocolumn}{article}
+%\@twocolumntrue
+}
+
+
+\ProcessOptions\relax
+

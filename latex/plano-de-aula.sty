@@ -1,0 +1,102 @@
+\usepackage{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{url}
+\usepackage[a4paper,top=2.5cm,left=3cm,right=3cm,bottom=2.5cm]{geometry}
+\usepackage[perpage,symbol*,para]{footmisc}
+%\usepackage{palatino}
+\usepackage{ifthen}
+\usepackage{setspace}
+\usepackage{pifont}
+\usepackage{wasysym}
+
+\newcommand{\action}[2]{
+  \begin{tabular}{p{.5\linewidth}p{.5\linewidth}}
+    %\ding{113}
+    #1 & #2
+  \end{tabular}
+  \vspace{1em}
+}
+
+
+\newcounter{theconteudo}
+\newcounter{Lcount}
+
+\setcounter{theconteudo}{1}
+
+\setlength\parindent{0cm}
+\setlength\parskip{\smallskipamount}
+
+\newcommand{\copyleft}[2]{
+  \copyright{} {#1} Pedro Kröger --- Versão #2 \\
+  \input{cc-license-short_pt.txt} Uma cópia da licença está disponível em
+  \url{creativecommons.org/licenses/by-nc-nd/2.0/br}.
+}
+
+\newcommand{\cabecalho}[4]{
+  \textbf{\textsc{Universidade Federal da Bahia}} \\
+  \textbf{\textsc{Escola de Música}} \\
+  \textbf{\textsc{Departamento de CLEM}} \par
+  \vspace*{1ex}
+  \textbf{Professor:} #1 \\
+  \textbf{Nível: } #2 \\
+  \textbf{Data: } #3
+}
+
+\newcommand{\titulo}[3]{  
+  \vspace*{5ex}
+  \begin{center}
+    \textbf{\Large Plano de Aula\footnote{\copyleft{#2}{#3}}} \\
+    \textsf{#1}
+  \end{center}
+  \vspace*{3ex}
+  \thispagestyle{empty}
+
+  {\footnotesize \tableofcontents}
+
+  \newpage
+}
+
+\newcommand{\conteudo}[2][0]{
+  \vspace{1ex}
+  \hspace{4ex} \arabic{theconteudo}.
+  \ifthenelse{\equal{#1}{0}}
+  {\textsc{#2}}
+  {\textsc{#2 [#1m]}}
+  \addtocounter{theconteudo}{1}
+  \addcontentsline{toc}{subsection}{#2 [#1m]}
+  \vspace{1ex}
+}
+
+%\newcommand{\acao}[1]{
+%  \item \textbf{#1}
+%}
+
+\newcommand{\ouvir}[1]{
+  \hrulefill\\
+  \twonotes \hspace{1ex} ouvir #1 \par
+  \vspace*{-1em}
+  \hrulefill
+  \vspace*{1em}
+}
+
+\newcommand{\pergunta}{
+  \item[\ding{45} \vspace{1ex} \underline{perguntas ou comentários?}]
+}
+
+\newcommand{\dados}[1]{
+    \vspace{1ex}
+    \parbox{.8\linewidth}{#1}
+    \vspace{1ex}
+}
+
+%\newenvironment{acoes}
+%{\begin{spacing}{1}
+%    \begin{list}{\arabic{Lcount}.}
+%      {\usecounter{Lcount}
+%       \setlength{\leftmargin}{10ex}
+%       %\setlength{\rightmargin}{5ex}
+%     }}
+%  {\end{list}
+%  \end{spacing}}

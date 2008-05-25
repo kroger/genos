@@ -1,0 +1,169 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{papers}
+\usepackage{float}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage{url}
+\usepackage{ifthen}
+\usepackage{fancyvrb}
+\usepackage{hyphenat}
+\usepackage{longtable}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage{ftnright}
+\usepackage{times}
+%\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+\twocolumn
+
+\newcommand{\pedrokroger}{
+  Pedro Kröger \\
+  Universidade Federal da Bahia \\
+  \url{pedro.kroger@gmail.com}
+}
+
+\newcommand{\makeabstract}{
+  \ifthenelse{\equal{\bbl@main@language}{brazil}}
+  {
+    \begin{abstract}
+      \input{resumo.txt}
+    \end{abstract}
+  }
+  {
+    \begin{abstract}
+      \input{abstract.txt}
+    \end{abstract}
+  }
+}
+
+\newcommand{\copyleft}[2]{
+  \ifthenelse{\equal{\bbl@main@language}{brazil}}
+  {
+    \textit{#1} \par \vspace{1em}
+    \copyright{} {#2} Pedro Kröger --- Versão \input{VERSION} \\
+    \input{cc-license-short_pt.txt} Uma cópia da licença está disponível em
+    \url{creativecommons.org/licenses/by-nc-nd/2.0/br}
+  }
+  {
+    \textit{#1} \par \vspace{1em}
+    \copyright{} {#2} Pedro Kröger --- Version \input{VERSION} \\
+    \input{cc-license-short_en.txt} A copy of the license is available
+    at \url{creativecommons.org/licenses/by-nc-nd/2.5/en}
+  }
+}
+
+\newcommand{\reffig}[1]{Exemplo~\ref{fig:#1}}
+
+\renewcommand{\o}{\textsuperscript{o}}
+\renewcommand{\a}{\textsuperscript{a}}
+    
+\floatstyle{ruled}  %%% tipos: plain, boxed, ruled
+\newfloat{example}{htbp}{cop}[section]
+
+\ifthenelse{\equal{\bbl@main@language}{brazil}}
+{\floatname{example}{Exemplo}}
+{\floatname{example}{Example}}
+
+\newcommand{\motivo}[1]{\textbf{\textit{#1}}}
+
+\newcommand{\eng}[1]{\textit{#1}}
+\newcommand{\prog}[1]{\textsf{#1}}
+\newcommand{\name}[1]{\texttt{#1}}
+\newcommand{\conceito}[1]{{\sf #1}}
+\newcommand{\sigla}[1]{{\sc #1}}
+\newcommand{\opc}[1]{{\tt #1}}
+\newcommand{\ling}[1]{{\it #1}}
+\newcommand{\code}[1]{{\tt #1}}
+\newcommand{\ang}[1]{``{#1}''}
+
+\newcommand{\nota}[1]{\marginpar{#1}}
+
+\bibliographystyle{plain}
+
+\setlength{\voffset}{-1in}
+\setlength{\hoffset}{-1in}
+\setlength{\textwidth}{7in}
+\setlength{\textheight}{9.25in}
+\setlength{\topmargin}{1in}
+\setlength{\topskip}{9pt}
+\setlength{\oddsidemargin}{0.75in}
+\setlength{\evensidemargin}{0.75in}
+\setlength{\footskip}{.35in}
+\setlength{\columnsep}{.83cm}
+\setlength{\columnseprule}{0pt}
+\setlength{\headheight}{9pt}
+\setlength{\headsep}{20pt}
+\setlength{\marginparwidth}{0in}
+\setlength{\marginparsep}{0in}
+
+\def\normalsize{%
+  \@setfontsize\normalsize{9}{10.8}%
+  \abovedisplayskip 8pt plus2pt minus4pt%
+  \belowdisplayskip\abovedisplayskip%
+  \abovedisplayshortskip \z@ plus3pt%
+  \belowdisplayshortskip 5pt plus3pt minus3pt%
+  \let\@listi\@listI%
+}
+\def\small{%
+  \@setfontsize\small{8}{9.6}%
+  \abovedisplayskip 7.5pt plus 3pt minus 4pt%
+  \belowdisplayskip\abovedisplayskip%
+  \abovedisplayshortskip \z@ plus2pt%
+  \belowdisplayshortskip 4pt plus2pt minus 2pt%
+  \def\@listi{%
+    \leftmargin\leftmargini%
+    \topsep 3pt plus 2pt minus 2pt%
+    \parsep 2pt plus 1pt minus 1pt%
+    \itemsep \parsep%
+    }%
+}
+\def\footnotesize{\@setfontsize\normalsize{9}{10.8}} % \normalsize
+\def\scriptsize{\@setfontsize\scriptsize{6}{7.2}}
+\def\tiny{\@setfontsize\tiny{5}{6}}
+\def\large{\@setfontsize\large{10}{12}}
+\def\Large{\@setfontsize\Large{11}{13.2}}
+\def\LARGE{\@setfontsize\LARGE{12}{14.4}}
+\def\huge{\@setfontsize\huge{14}{16.8}}
+\def\Huge{\@setfontsize\Huge{20.4}{24.48}}
+
+\def\@AcmConfCopyrightText{}
+%\newcommand{\PublishedText}[1]{\def\@AcmConfPublishedText{#1}}
+\newcommand{\CopyrightText}[1]{
+  \def\@AcmConfCopyrightText{\small #1}
+}
+\newcommand{\AcmConfBox}[1]{%
+  %\framebox[\columnwidth]{#1}
+  \parbox{\columnwidth}{#1}
+}
+
+\newcommand{\@AcmConfCopyrightSpace}{
+  \def\ftype@AcmConfCopyrightBox{8}
+  \@float{AcmConfCopyrightBox}[b]
+  \AcmConfBox{
+    \parbox[t][1.2in][b]{\columnwidth}{%
+      \hrulefill\\
+      \@AcmConfCopyrightText{}
+    }
+  }
+  \end@float
+}
+
+\let\@AcmConfMaketitle\maketitle
+\renewcommand{\maketitle}{
+  \@AcmConfMaketitle
+  \@AcmConfCopyrightSpace
+}
+
+\AtBeginDocument{
+  \normalsize
+  \def\@oddfoot{}
+  \ifx\@AcmConfCopyrightText\empty
+  \ClassError{acmconf}{%
+    You have not specified the copyright notice
+    \MessageBreak
+    Use \protect\CopyrightText\space in the preamble}{}
+  \fi
+}
+\endinput
+

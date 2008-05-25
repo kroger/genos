@@ -1,0 +1,43 @@
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}
+\usepackage{paralist}
+\usepackage{url}
+\usepackage{pifont}
+\usepackage[T1]{fontenc}
+
+\newenvironment{topico}[1]{
+  \vspace{1em}
+  \textsf{\large \textbf{#1}}\par
+  \hrulefill
+  \begin{compactenum}}
+  {\end{compactenum}}
+
+\newcommand{\titulo}[1]{
+  \begin{center}
+    \huge \textbf{\textsf{#1}} \par
+  \end{center}
+}
+
+\setlength\parindent{0cm}
+
+\newcommand{\cleartoevenpage}[1][\@empty]{%
+  \clearpage%
+  \ifodd\c@page\hbox{}#1\clearpage\fi
+}
+
+%  move to next even numbered page without flushing floats,
+%  putting optional arg on skipped page, if any
+\newcommand{\movetoevenpage}[1][\@empty]{%
+  \newpage%
+  \ifodd\c@page\hbox{}#1\newpage\fi}
+
+% clear to next odd numbered page, 
+% putting optional arg on skipped page, if any
+\newcommand{\cleartooddpage}[1][\@empty]{%
+  \clearpage%
+  \ifodd\c@page\else\hbox{}#1\clearpage\fi}
+
+% move to next odd numbered page without flushing floats, 
+% putting optional arg on skipped page, if any
+\newcommand{\movetooddpage}[1][\@empty]{%
+  \newpage%
+  \ifodd\c@page\else\hbox{}#1\newpage\fi}

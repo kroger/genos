@@ -1,0 +1,45 @@
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\setlength{\parindent}{0cm}
+\usepackage{graphicx}
+\usepackage[top=2cm]{geometry}
+
+\newcommand{\titulo}[1]{\textbf{\textsf{#1}}}
+
+\newcommand{\texto}[4]{
+  \thispagestyle{empty}
+
+  \begin{center}
+
+    \includegraphics[scale=.1]{ufbaselo}
+{\large
+
+  \titulo{MINISTÉRIO DA EDUCAÇÃO}\\
+  \titulo{UNIVERSIDADE FEDERAL DA BAHIA}\\
+  \titulo{ESCOLA DE MÚSICA}\\
+  \vspace{.5cm}
+  \titulo{DEPARTAMENTO DE COMPOSIÇÃO, LITERATURA E
+   ESTRUTURAÇÃO MUSICAL}
+}
+  \end{center}
+
+\vspace{1.5cm}
+
+Senhor(a) Professor(a), \\
+
+Estamos convocando V.Sa. para reunião #1 de Departamento a se realizar
+no dia #2 às #3, com a seguinte ordem do dia:
+
+\begin{enumerate}
+#4
+\end{enumerate}
+
+Atenciosamente, \\
+
+\hfill Salvador, \today \\
+
+\vspace{2cm}
+
+Pedro Kröger \\
+Chefe do Dept\textsuperscript{o}. de CLEM
+}

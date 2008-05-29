@@ -17,6 +17,7 @@
 \RequirePackage{setspace}
 \RequirePackage[utf8,utf8x]{inputenc}
 \RequirePackage{babel}
+\RequirePackage{ifthen}
 \RequirePackage{indentfirst}
 \usepackage{wasysym}
 \usepackage[font=it]{caption}
@@ -65,7 +66,9 @@
   {\endlist\end{spacing}}
 
 \newcommand{\keywords}[1]{
-  \textbf{Palavras-Chave: }#1
+  \ifthenelse{\equal{\bbl@main@language}{brazil}}
+  {\textbf{Palavras-Chave: }#1}
+  {\textbf{Keywords: }#1}
 }
 
 \pagestyle{fancy}

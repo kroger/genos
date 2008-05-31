@@ -8,7 +8,7 @@
 
 \RequirePackage{url}
 %\RequirePackage{caption2}
-\RequirePackage{zref-lastpage}
+\RequirePackage{lastpage}
 \RequirePackage{br-chicago}
 \RequirePackage{fancyhdr}
 \RequirePackage{times}
@@ -16,13 +16,16 @@
 \RequirePackage{titletoc}
 \RequirePackage{setspace}
 \RequirePackage[utf8,utf8x]{inputenc}
-\RequirePackage[brazil]{babel}
+\RequirePackage{babel}
+\RequirePackage{ifthen}
+\RequirePackage{parskip}
 \RequirePackage{indentfirst}
 \usepackage{wasysym}
 \usepackage[font=it]{caption}
-\usepackage{subfig}
+\usepackage[FIGBOTCAP,TABBOTCAP]{subfigure}
 \usepackage{graphicx,url}
 \usepackage{indentfirst}
+\onehalfspacing
 
 %\renewcommand{\captionfont}{\small\itshape}
 
@@ -75,7 +78,9 @@
   {\endlist\end{spacing}}
 
 \newcommand{\keywords}[1]{
-  \textbf{Palavras-Chave: }#1
+  \ifthenelse{\equal{\bbl@main@language}{brazil}}
+  {\textbf{Palavras-Chave: }#1}
+  {\textbf{Keywords: }#1}
 }
 
 \pagestyle{fancy}

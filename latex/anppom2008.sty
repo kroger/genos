@@ -40,6 +40,16 @@
 
 \flushbottom
 
+
+\def\abovestrut#1{\rule[0in]{0in}{#1}\ignorespaces}
+\def\belowstrut#1{\rule[-#1]{0in}{#1}\ignorespaces}
+
+\def\abovespace{\abovestrut{0.20in}}
+\def\aroundspace{\abovestrut{0.20in}\belowstrut{0.10in}}
+\def\belowspace{\belowstrut{0.10in}}
+
+
+
 \renewcommand{\title}[1]{
   \begin{center}
     \Large \textbf{\textsf{#1}}

@@ -40,7 +40,7 @@ vpath %.ly $(LILYDIR)
 #USE_LATEX2HTML = 1
 #USE_PDFLATEX = 1
 #USE_TEX2PAGE = 1
-USE_DVIPDFM = 1
+#USE_DVIPDFM = 1
 
 doc: pdf
 

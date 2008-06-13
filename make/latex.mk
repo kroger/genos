@@ -27,9 +27,9 @@ CLEAN_FILES+= $(LILY_PS1:.ly=.ps)
 CLEAN_FILES+= $(LILY_PDF1:.ly=.pdf)
 CLEAN_FILES+= $(LILY_SVG1:.ly=.svg)
 
-LATEX_ENV+= BIBINPUTS=~/bib/:
-LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:
-LATEX_ENV+= TEXINPUTS=~/lib/latex//:~/lib/emacs/bbdb/tex/:~/lib/license//:src:config:figs:data:lily:out:
+LATEX_ENV+= BIBINPUTS=~/bib/:$(BIBINPUTS):
+LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):
+LATEX_ENV+= TEXINPUTS=~/lib/latex//:~/lib/emacs/bbdb/tex/:~/lib/license//:src:config:figs:data:lily:out:$(TEXINPUTS):
 
 vpath %.eps $(FIGSDIR)
 vpath %.eps $(DATADIR)

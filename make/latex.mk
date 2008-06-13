@@ -29,7 +29,7 @@ CLEAN_FILES+= $(LILY_SVG1:.ly=.svg)
 
 LATEX_ENV+= BIBINPUTS=~/bib/:
 LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:
-LATEX_ENV+= TEXINPUTS=~/lib/latex//:~/lib/emacs/bbdb/tex/:~/lib/license//:src:config:
+LATEX_ENV+= TEXINPUTS=~/lib/latex//:~/lib/emacs/bbdb/tex/:~/lib/license//:src:config:figs:data:lily:out:
 
 vpath %.eps $(FIGSDIR)
 vpath %.eps $(DATADIR)

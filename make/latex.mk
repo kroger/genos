@@ -7,13 +7,13 @@ OTHER_EPS1= $(patsubst %.dia,%.eps,$(wildcard $(FIGSDIR)/*.dia))
 OTHER_EPS2= $(patsubst %.svg,%.eps,$(wildcard $(FIGSDIR)/*.svg))
 OTHER_EPS3= $(patsubst %.plot,%.eps,$(wildcard $(DATADIR)/*.plot))
 
-LILY_EPS4= $(patsubst %.ly,%.eps,$(wildcard $(LILYDIR)/*.ly))
-LILY_PNG2= $(patsubst %.ly,%.png,$(wildcard $(LILYDIR)/*.ly))
-LILY_PS1 = $(patsubst %.ly,%.ps,$(wildcard $(LILYDIR)/*.ly))
-LILY_PDF1= $(patsubst %.ly,%.pdf,$(wildcard $(LILYDIR)/*.ly))
-LILY_SVG1= $(patsubst %.ly,%.svg,$(wildcard $(LILYDIR)/*.ly))
+LILY_EPS= $(patsubst %.ly,%.eps,$(wildcard $(LILYDIR)/*.ly))
+LILY_PNG= $(patsubst %.ly,%.png,$(wildcard $(LILYDIR)/*.ly))
+LILY_PS = $(patsubst %.ly,%.ps,$(wildcard $(LILYDIR)/*.ly))
+LILY_PDF= $(patsubst %.ly,%.pdf,$(wildcard $(LILYDIR)/*.ly))
+LILY_SVG= $(patsubst %.ly,%.svg,$(wildcard $(LILYDIR)/*.ly))
 
-#OTHER += $(LILY_EPS4) $(LILY_PNG2) $(LILY_PS1) $(LILY_PDF1) $(LILY_SVG1)
+#OTHER += $(LILY_EPS) $(LILY_PNG) $(LILY_PS) $(LILY_PDF) $(LILY_SVG)
 
 OTHER += $(OTHER_EPS1) $(OTHER_EPS2) $(OTHER_EPS3) $(OTHER_PNG1) 
 
@@ -21,11 +21,11 @@ CLEAN_FILES+= $(OTHER_EPS3:.plot=.eps)
 CLEAN_FILES+= $(OTHER_EPS2:.svg=.eps)
 CLEAN_FILES+= $(OTHER_EPS1:.dia=.eps)
 CLEAN_FILES+= $(OTHER_PNG1:.dia=.png)
-CLEAN_FILES+= $(LILY_EPS4:.ly=.eps)
-CLEAN_FILES+= $(LILY_PNG2:.ly=.png)
-CLEAN_FILES+= $(LILY_PS1:.ly=.ps)
-CLEAN_FILES+= $(LILY_PDF1:.ly=.pdf)
-CLEAN_FILES+= $(LILY_SVG1:.ly=.svg)
+CLEAN_FILES+= $(LILY_EPS:.ly=.eps)
+CLEAN_FILES+= $(LILY_PNG:.ly=.png)
+CLEAN_FILES+= $(LILY_PS:.ly=.ps)
+CLEAN_FILES+= $(LILY_PDF:.ly=.pdf)
+CLEAN_FILES+= $(LILY_SVG:.ly=.svg)
 
 LATEX_ENV+= BIBINPUTS=~/bib/:$(BIBINPUTS):
 LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):

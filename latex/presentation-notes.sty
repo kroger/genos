@@ -1,0 +1,24 @@
+\usepackage[brazil]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2.5cm,right=3.5cm,marginparwidth=3cm]{geometry}
+\usepackage{fancyvrb}
+\usepackage{setspace}
+\usepackage{pifont}
+\usepackage{graphicx}
+
+\newcommand{\tocar}[1]{
+  \textbf{tocar:} #1
+}
+
+\newcommand{\exemplo}[1]{
+  \vspace{.5cm}
+  $\Rightarrow$\textbf{exemplo:} #1
+  \vspace{.5cm}
+}
+
+\newcounter{slidecounter}
+
+\newcommand{\slide}{
+  \addtocounter{slidecounter}{1}
+  \marginpar{\textbf{[slide \arabic{slidecounter}]}}
+}

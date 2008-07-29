@@ -14,6 +14,8 @@ LILY_PDF= $(patsubst %.ly,%.pdf,$(wildcard $(LILYDIR)/*.ly))
 LILY_SVG= $(patsubst %.ly,%.svg,$(wildcard $(LILYDIR)/*.ly))
 OTHER_PNG2= $(patsubst %.svg,%.png,$(wildcard $(FIGSDIR)/*.svg))
 
+INKSCAPE_PDF = $(patsubst %.svg,%.pdf,$(wildcard $(FIGSDIR)/*.svg))
+
 #OTHER += $(LILY_EPS) $(LILY_PNG) $(LILY_PS) $(LILY_PDF) $(LILY_SVG) $(OTHER_PNG2) 
 
 OTHER += $(OTHER_EPS1) $(OTHER_EPS2) $(OTHER_EPS3) $(OTHER_PNG1) 
@@ -59,6 +61,9 @@ doc: pdf
 
 %.png: %.svg
 	inkscape -T --export-area-drawing --export-png=$@ $<
+
+%.pdf: %.svg
+	inkscape -T --export-area-snap --export-pdf=$@ $<
 
 %.eps: %.dia
 	dia --export=$@ $<

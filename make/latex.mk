@@ -68,6 +68,9 @@ doc: pdf
 %.eps: %.dia
 	dia --export=$@ $<
 
+%.eps: %.png
+	convert $< $@
+
 %.png: %.dia
 	dia --export=$@ $<
 

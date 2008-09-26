@@ -6,6 +6,7 @@ OTHER_PNG1= $(patsubst %.dia,%.png,$(wildcard $(FIGSDIR)/*.dia))
 OTHER_EPS1= $(patsubst %.dia,%.eps,$(wildcard $(FIGSDIR)/*.dia))
 OTHER_EPS2= $(patsubst %.svg,%.eps,$(wildcard $(FIGSDIR)/*.svg))
 OTHER_EPS3= $(patsubst %.plot,%.eps,$(wildcard $(DATADIR)/*.plot))
+OTHER_EPS4= $(patsubst %.png,%.eps,$(wildcard $(FIGSDIR)/*.png))
 
 LILY_EPS= $(patsubst %.ly,%.eps,$(wildcard $(LILYDIR)/*.ly))
 LILY_PNG= $(patsubst %.ly,%.png,$(wildcard $(LILYDIR)/*.ly))

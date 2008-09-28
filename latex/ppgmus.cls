@@ -10,7 +10,6 @@
 
 \PassOptionsToPackage{12pt}{book}
 
-\doublespacing
 \setlength\parskip{\smallskipamount}
 \setlength\parindent{0cm}
 
@@ -227,6 +226,8 @@ texto texto texto texto
   \ifdefined\@bancaiNome\termoDeAprovacao\fi
   \ifdefined\@textoDedicatoria\dedicatoria\fi
   \ifdefined\@textoEpigrafe\epigrafe\fi
+  \doublespacing
+
 }
 
 \makeatletter

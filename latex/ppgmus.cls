@@ -6,9 +6,11 @@
 \usepackage{times}
 \usepackage{ifthen}
 \usepackage{fancyhdr} 
+\usepackage{setspace}
 
 \PassOptionsToPackage{12pt}{book}
 
+\doublespacing
 \setlength\parskip{\smallskipamount}
 \setlength\parindent{0cm}
 

@@ -10,8 +10,8 @@
 
 \PassOptionsToPackage{12pt}{book}
 
-\setlength\parskip{\smallskipamount}
-\setlength\parindent{0cm}
+%\setlength\parskip{\smallskipamount}
+%\setlength\parindent{0cm}
 
 \pagestyle{fancy}                       % Sets fancy header and footer
 \renewcommand{\chaptermark}[1]{%         % Lower Case Chapter marker style

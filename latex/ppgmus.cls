@@ -14,6 +14,7 @@
 \usepackage{subfig}
 \usepackage{color}
 \usepackage{colortbl}
+\usepackage{lastpage}
 
 %\setlength\parskip{\smallskipamount}
 %\setlength\parindent{0cm}
@@ -48,8 +49,17 @@ texto texto texto texto
 
 \def\titulo#1{\gdef\@titulo{#1}}
 \def\autor#1{\gdef\@autor{#1}}
+\def\autorbib#1{\gdef\@autorbib{#1}}
 \def\ano#1{\gdef\@ano{#1}}
 \def\tipo#1{\gdef\@tipo{#1}}
+
+\def\cutter#1{\gdef\@cutter{#1}}
+\def\cdu#1{\gdef\@cdu{#1}}
+\def\chavei#1{\gdef\@chavei{#1}}
+\def\chaveii#1{\gdef\@chaveii{#1}}
+\def\chaveiii#1{\gdef\@chaveiii{#1}}
+\def\chaveiv#1{\gdef\@chaveiv{#1}}
+
 \def\area#1{\gdef\@area{#1}}
 \def\lugar#1{\gdef\@lugar{#1}}
 \def\orientador#1{\gdef\@orientador{#1}}
@@ -141,8 +151,41 @@ texto texto texto texto
 }
 
 \newcommand{\fichaCatalografica}{
-  \thispagestyle{empty}
-  
+  \thispagestyle{empty}  
+  {
+    \small
+    \vspace*{12cm}
+    \begin{center}
+      \begin{tabular}{c}
+        %{\scriptsize \bf \MakeUppercase{Ficha catalográfica preparada pela 
+        %    Biblioteca Central da
+        %    UFCG.}}
+      \end{tabular}
+      \vspace{-0.2cm}
+      \begin{tabular}{|cp{30em}|} \hline
+        \hspace{1.3cm} & \\
+        & \@autorbib \\
+        \hspace{0.2cm} \@cutter & \hspace{0.3cm} \@titulo / \@autor{} -- \@lugar \\
+        & \hspace{0.65cm} \pageref{LastPage}f. : il. \\
+        & UFBA \\
+        & \hspace{0.6cm} Inclui Bibliografia. \\
+        & \hspace{0.6cm} \ifthenelse{\equal{\@tipo}{doutorado}}
+        {Tese (Doutorado em \@area) -- }
+        {Dissertação (Mestrado em \@area) -- }
+        Universidade Federal \\
+        & da Bahia. Escola de Música.\\
+        & \hspace{0.6cm} Orientador: \@orientador.\\
+        & \\
+        & \hspace{0.6cm} 1 -- \@chavei \hspace{0.1cm} 2 -- 
+        \@chaveii \\
+        & \hspace{0.6cm} 3 -- \@chaveiii \hspace{0.1cm} 4 -- 
+        \@chaveiv \hspace{0.1cm} 5 -- Título\\
+        & \\
+        & \hspace{9.75cm} CDU \@cdu \\
+        \hline
+      \end{tabular}
+    \end{center}
+}
   \newpage
 }
 

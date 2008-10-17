@@ -142,7 +142,7 @@ texto texto texto texto
 
 \newcommand{\fichaCatalografica}{
   \thispagestyle{empty}
-  [ficha catalográfica]
+  
   \newpage
 }
 

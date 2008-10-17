@@ -25,10 +25,10 @@
   \markboth{\thechapter.\ #1}{.}} %
 \renewcommand{\sectionmark}[1]{%         % Lower case Section marker style
   \markright{\thesection.\ #1}}         %
-\fancyhead[L,RO]{\thepage}    % Page number (boldface) in left on even
+\fancyhead[LE,RO]{\thepage}    % Page number (boldface) in left on even
                                 % pages and right on odd pages
 \fancyhead[LO]{}      % Chapter in the right on even pages
-\fancyhead[R]{}     % Section in the left on odd pages
+\fancyhead[RE]{}     % Section in the left on odd pages
 \fancyfoot{}     % Section in the left on odd pages
 \renewcommand{\headrulewidth}{0.0pt}    % Width of head rule
 

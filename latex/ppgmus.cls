@@ -1,3 +1,6 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{ppgmus}
+
 \LoadClass[12pt,oneside]{book}
 \usepackage[brazil]{babel}
 \usepackage{graphicx}
@@ -7,24 +10,27 @@
 \usepackage{ifthen}
 \usepackage{fancyhdr} 
 \usepackage{setspace}
-
-\PassOptionsToPackage{12pt}{book}
+\usepackage{url}
+\usepackage{subfig}
+\usepackage{color}
+\usepackage{colortbl}
 
 %\setlength\parskip{\smallskipamount}
 %\setlength\parindent{0cm}
+
+\setlength\parskip{\medskipamount}
 
 \pagestyle{fancy}                       % Sets fancy header and footer
 \renewcommand{\chaptermark}[1]{%         % Lower Case Chapter marker style
   \markboth{\thechapter.\ #1}{.}} %
 \renewcommand{\sectionmark}[1]{%         % Lower case Section marker style
   \markright{\thesection.\ #1}}         %
-\fancyhead[LE,RO]{\thepage}    % Page number (boldface) in left on even
+\fancyhead[L,RO]{\thepage}    % Page number (boldface) in left on even
                                 % pages and right on odd pages
 \fancyhead[LO]{}      % Chapter in the right on even pages
-\fancyhead[RE]{}     % Section in the left on odd pages
+\fancyhead[R]{}     % Section in the left on odd pages
 \fancyfoot{}     % Section in the left on odd pages
 \renewcommand{\headrulewidth}{0.0pt}    % Width of head rule
-
 
 \newcommand{\texto}{
 Texto texto texto texto texto texto texto texto texto texto texto
@@ -180,9 +186,11 @@ texto texto texto texto
 }
 
 \newcommand{\banca}[3]{
+  \setlength\parindent{0em}
   #1 \hrulefill \\
   #2 \\
   #3 \par
+  \setlength\parindent{1em}
 }
 
 \newcommand{\folhaDeGuarda}{
@@ -226,11 +234,33 @@ texto texto texto texto
   \ifdefined\@bancaiNome\termoDeAprovacao\fi
   \ifdefined\@textoDedicatoria\dedicatoria\fi
   \ifdefined\@textoEpigrafe\epigrafe\fi
-  \doublespacing
-
 }
 
+\renewcommand\frontmatter{%
+    \cleardoublepage
+  \@mainmatterfalse
+  \singlespacing
+  \pagenumbering{roman}}
+
+\renewcommand\mainmatter{%
+    \cleardoublepage
+  \@mainmattertrue
+  \doublespacing
+  \setlength\parindent{1em}
+  \pagenumbering{arabic}}
+
+\renewcommand\backmatter{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+  \singlespacing
+  \setlength\parindent{0em}
+  \@mainmatterfalse}
+
 \makeatletter
+
 \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
                        \if@mainmatter
                          \refstepcounter{chapter}%

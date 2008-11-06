@@ -8,6 +8,9 @@ OTHER_EPS2= $(patsubst %.svg,%.eps,$(wildcard $(FIGSDIR)/*.svg))
 OTHER_EPS3= $(patsubst %.plot,%.eps,$(wildcard $(DATADIR)/*.plot))
 OTHER_EPS4= $(patsubst %.png,%.eps,$(wildcard $(FIGSDIR)/*.png))
 
+OTHER_PDF3= $(patsubst %.plot,%.pdf,$(wildcard $(DATADIR)/*.plot))
+
+
 LILY_EPS= $(patsubst %.ly,%.eps,$(wildcard $(LILYDIR)/*.ly))
 LILY_PNG= $(patsubst %.ly,%.png,$(wildcard $(LILYDIR)/*.ly))
 LILY_PS = $(patsubst %.ly,%.ps,$(wildcard $(LILYDIR)/*.ly))
@@ -57,6 +60,10 @@ doc: pdf
 %.eps: %.plot %.dat
 	gnuplot $<
 
+%.pdf: %.plot %.dat
+	gnuplot $<
+	epstopdf --outfile=$@ $(patsubst %.plot,%.eps, $<)
+
 %.eps: %.svg
 	inkscape -T --export-eps=$@ $<
 
@@ -65,6 +72,10 @@ doc: pdf
 
 %.pdf: %.svg
 	inkscape -T --export-area-snap --export-pdf=$@ $<
+
+%.pdf: %.plot
+	gnuplot $<
+	convert $(subst plot,eps, $<) $@
 
 %.eps: %.dia
 	dia --export=$@ $<

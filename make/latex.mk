@@ -31,6 +31,9 @@ CLEAN_FILES+= $(LILY_PS:.ly=.ps)
 CLEAN_FILES+= $(LILY_PDF:.ly=.pdf)
 CLEAN_FILES+= $(LILY_SVG:.ly=.svg)
 
+CLEAN_BEAMER = .nav .snm .vrb
+CLEAN_FILES+= $(foreach suffix,$(CLEAN_BEAMER),$(addsuffix $(suffix),$(NAME)))
+
 LATEX_ENV+= BIBINPUTS=~/bib/:$(BIBINPUTS):
 LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):
 LATEX_ENV+= TEXINPUTS=~/lib/latex//:~/lib/emacs/bbdb/tex/:~/lib/license//:src:config:figs:data:lily:out:$(TEXINPUTS):

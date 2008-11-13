@@ -272,7 +272,7 @@ texto texto texto texto
 \renewcommand{\maketitle}{
   \capa
   \folhaDeRosto
-  \fichaCatalografica
+  \ifdefined\@autorbib\fichaCatalografica\fi
   \folhaDeGuarda
   \ifdefined\@bancaiNome\termoDeAprovacao\fi
   \ifdefined\@textoDedicatoria\dedicatoria\fi

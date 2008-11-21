@@ -9,7 +9,7 @@ OTHER_EPS3= $(patsubst %.plot,%.eps,$(wildcard $(DATADIR)/*.plot))
 OTHER_EPS4= $(patsubst %.png,%.eps,$(wildcard $(FIGSDIR)/*.png))
 
 OTHER_PDF3= $(patsubst %.plot,%.pdf,$(wildcard $(DATADIR)/*.plot))
-
+OTHER_PDF4= $(patsubst %.png,%.pdf,$(wildcard $(FIGSDIR)/*.png))
 
 LILY_EPS= $(patsubst %.ly,%.eps,$(wildcard $(LILYDIR)/*.ly))
 LILY_PNG= $(patsubst %.ly,%.png,$(wildcard $(LILYDIR)/*.ly))
@@ -56,6 +56,9 @@ doc: pdf
 
 %.html: %.tex
 	htlatex $<
+
+%.pdf: %.eps
+	epstopdf $<
 
 %.txt:  %.html
 	lynx -dump $< > $@

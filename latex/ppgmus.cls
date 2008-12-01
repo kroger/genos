@@ -26,6 +26,7 @@
   \markboth{\thechapter.\ #1}{.}} %
 \renewcommand{\sectionmark}[1]{%         % Lower case Section marker style
   \markright{\thesection.\ #1}}         %
+
 \fancyhead[LE,RO]{\thepage}    % Page number (boldface) in left on even
                                 % pages and right on odd pages
 \fancyhead[LO]{}      % Chapter in the right on even pages
@@ -92,6 +93,9 @@ texto texto texto texto
 \def\bancavTitulo#1{\gdef\@bancavTitulo{#1}}
 \def\bancavEstudo#1{\gdef\@bancavEstudo{#1}}
 \def\bancavAtuacao#1{\gdef\@bancavAtuacao{#1}}
+
+\def\figuraTermo#1{\gdef\@figuraTermo{#1}}
+\def\escala#1{\gdef\@escala{#1}}
 
 \def\textoDedicatoria#1{\gdef\@textoDedicatoria{#1}}
 \def\textoEpigrafe#1{\gdef\@textoEpigrafe{#1}}
@@ -240,6 +244,12 @@ texto texto texto texto
   \setlength\parindent{1em}
 }
 
+\newcommand{\termoAprov}{
+  \begin{center}
+  \includegraphics[scale=\@escala]{\@figuraTermo}
+  \end{center}
+}
+
 \newcommand{\folhaDeGuarda}{
   \thispagestyle{empty}
   ~
@@ -278,6 +288,7 @@ texto texto texto texto
   \folhaDeRosto
   \ifdefined\@autorbib\fichaCatalografica\fi
   \folhaDeGuarda
+  \ifdefined\@figuraTermo\termoAprov\fi
   \ifdefined\@bancaiNome\termoDeAprovacao\fi
   \ifdefined\@textoDedicatoria\dedicatoria\fi
   \ifdefined\@textoEpigrafe\epigrafe\fi

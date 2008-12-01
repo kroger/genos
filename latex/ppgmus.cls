@@ -55,6 +55,7 @@ texto texto texto texto
 
 \def\cutter#1{\gdef\@cutter{#1}}
 \def\cdu#1{\gdef\@cdu{#1}}
+\def\cdd#1{\gdef\@cdd{#1}}
 \def\chavei#1{\gdef\@chavei{#1}}
 \def\chaveii#1{\gdef\@chaveii{#1}}
 \def\chaveiii#1{\gdef\@chaveiii{#1}}
@@ -164,24 +165,27 @@ texto texto texto texto
       \vspace{-0.2cm}
       \begin{tabular}{|cp{30em}|} \hline
         \hspace{1.3cm} & \\
-        & \@autorbib \\
-        \hspace{0.2cm} \@cutter & \hspace{0.3cm} \@titulo / \@autor{} -- \@lugar \\
-        & \hspace{0.65cm} \pageref{LastPage}f. : il. \\
-        & UFBA \\
-        & \hspace{0.6cm} Inclui Bibliografia. \\
+        \@cutter & \@autorbib \\
+        & \hspace{0.6cm} \@titulo{} / \@autor{}. -- \@ano{}. \\
+        & \hspace{0.6cm} \pageref{LastPage}f. : il. \\
+        & \\
+        & \hspace{0.6cm} Orientador: \@orientador\\
         & \hspace{0.6cm} \ifthenelse{\equal{\@tipo}{doutorado}}
         {Tese (Doutorado em \@area) -- }
         {Dissertação (Mestrado em \@area) -- }
         Universidade Federal \\
-        & da Bahia. Escola de Música.\\
-        & \hspace{0.6cm} Orientador: \@orientador.\\
+        & da Bahia, Escola de Música, \@ano{}.\\
         & \\
-        & \hspace{0.6cm} 1 -- \@chavei \hspace{0.1cm} 2 -- 
-        \@chaveii \\
-        & \hspace{0.6cm} 3 -- \@chaveiii \hspace{0.1cm} 4 -- 
-        \@chaveiv \hspace{0.1cm} 5 -- Título\\
+        & \hspace{0.6cm}
+        %% comentar as chaves desnecessárias
+        1. \@chavei.
+        2. \@chaveii.
+        3. \@chaveiii.
+        4. \@chaveiv. 
+        I. \@autor. II. Universidade Federal da Bahia. Escola de Música. III. Título.\\
         & \\
-        & \hspace{9.75cm} CDU \@cdu \\
+        & \hspace{9cm} CDD \@cdd \\
+        & \hspace{9cm} CDU \@cdu \\
         \hline
       \end{tabular}
     \end{center}

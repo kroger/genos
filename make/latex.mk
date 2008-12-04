@@ -61,6 +61,11 @@ CLEAN_FILES+= $(DIA_PNG:.dia=.png)
 
 PNG_EPS= $(patsubst %.png,%.eps,$(wildcard $(FIGSDIR)/*.png))
 PNG_PDF= $(patsubst %.png,%.pdf,$(wildcard $(FIGSDIR)/*.png))
+CLEAN_FILES+= $(PNG_EPS:.plot=.eps)
+CLEAN_FILES+= $(PNG_PDF:.plot=.pdf)
+
+EPS_PDF= $(patsubst %.eps,%.pdf,$(wildcard $(FIGSDIR)/*.eps))
+CLEAN_FILES+= $(PNG_PDF:.plot=.pdf)
 
 GNUPLOT_PDF= $(patsubst %.plot,%.pdf,$(wildcard $(DATADIR)/*.plot))
 GNUPLOT_EPS= $(patsubst %.plot,%.eps,$(wildcard $(DATADIR)/*.plot))

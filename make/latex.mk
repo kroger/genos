@@ -48,6 +48,7 @@
 # Makefile. Se ela não existir aqui, adicione!
 #
 
+include ~/.latexmk
 
 LILYDIR = lily
 FIGSDIR = figs
@@ -89,9 +90,7 @@ CLEAN_FILES+= $(SVG_EPS:.svg=.eps)
 CLEAN_BEAMER = .nav .snm .vrb
 CLEAN_FILES+= $(foreach suffix,$(CLEAN_BEAMER),$(addsuffix $(suffix),$(NAME)))
 
-LATEX_ENV+= BIBINPUTS=~/bib/:$(BIBINPUTS):
-LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):
-LATEX_ENV+= TEXINPUTS=~/lib/latex//:~/lib/emacs/bbdb/tex/:~/lib/license//:src:config:figs:data:lily:out:$(TEXINPUTS):
+LATEX_ENV+= TEXINPUTS=:src:config:figs:data:lily:out:$(TEXINPUTS):
 
 vpath %.eps $(FIGSDIR)
 vpath %.eps $(DATADIR)
@@ -161,4 +160,4 @@ doc: pdf
 %.svg: %.ly
 	lilypond -b svg -o  $(basename $@) $<
 
--include /usr/share/latex-mk/latex.gmk
+include $(LATEXMK-FILE)

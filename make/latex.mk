@@ -48,8 +48,6 @@
 # Makefile. Se ela não existir aqui, adicione!
 #
 
-include ~/.latexmk
-
 LILYDIR = lily
 FIGSDIR = figs
 DATADIR = data
@@ -77,10 +75,12 @@ LILY_PNG= $(patsubst %.ly,%.png,$(wildcard $(LILYDIR)/*.ly))
 LILY_PS = $(patsubst %.ly,%.ps,$(wildcard $(LILYDIR)/*.ly))
 LILY_PDF= $(patsubst %.ly,%.pdf,$(wildcard $(LILYDIR)/*.ly))
 LILY_SVG= $(patsubst %.ly,%.svg,$(wildcard $(LILYDIR)/*.ly))
+LILY_WAV= $(patsubst %.ly,%.wav,$(wildcard $(LILYDIR)/*.ly))
 CLEAN_FILES+= $(LILY_EPS:.ly=.eps)
 CLEAN_FILES+= $(LILY_PNG:.ly=.png)
 CLEAN_FILES+= $(LILY_PS:.ly=.ps)
 CLEAN_FILES+= $(LILY_PDF:.ly=.pdf)
+CLEAN_FILES+= $(LILY_PDF:.ly=.wav)
 
 TXT_HTML= $(patsubst %.txt,%.html,$(wildcard *.txt))
 CLEAN_FILES+= $(TXT_HTML:.txt=.html)
@@ -165,4 +165,8 @@ doc: pdf
 %.svg: %.ly
 	lilypond -b svg -o  $(basename $@) $<
 
-include $(LATEXMK-FILE)
+%.wav: %.midi
+	timidity -Ow $<
+
+%.wav: %.mid
+	timidity -Ow $<

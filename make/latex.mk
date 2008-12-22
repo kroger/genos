@@ -19,6 +19,18 @@
 # ~/lib                   <- essa biblioteca
 # ~/bib                   <- a bibliografia do genos
 #
+# É necessário também ter um ~/.latexmk como esse:
+# 
+# LATEXMK-FILE = /usr/share/latex-mk/latex.gmk
+# GENOS_LATEX = ~/lib/make/latex.mk
+#
+# LATEX_ENV+= BIBINPUTS=~/lib/bib//:$(BIBINPUTS):
+# LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):
+# LATEX_ENV+= TEXINPUTS=~/lib/latex//:lily:figs:data:out:src:config:$(TEXINPUTS):
+# 
+# include $(LATEXMK-FILE)
+# include $(GENOS_LATEX)
+#
 # Para um projeto que use todos esses componentes, o Makefile
 # recomendado, <projeto>/Makefile é:
 #  
@@ -29,8 +41,7 @@
 #   # OTHER += $(GNUPLOY_PDF) # descomente se usar gnuplot
 #   # OTHER += $(SVG_PDF) # descomente se usar imagens svg
 #   # OTHER += $(DIA_PNG) # descomente se usar diagramas dia
-#   -include ~/lib/make/latex.mk # esse arquivo
-#   -include ~/repositorios/genos-repos/lib/make/latex.mk # no pc de marcos
+#   -include ~/.latexmk
 #
 # E pronto!
 # 

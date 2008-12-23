@@ -97,7 +97,7 @@ TXT_HTML= $(patsubst %.txt,%.html,$(wildcard *.txt))
 CLEAN_FILES+= $(TXT_HTML:.txt=.html)
 
 SVG_PNG= $(patsubst %.svg,%.png,$(wildcard $(FIGSDIR)/*.svg))
-SVG_PDF = $(patsubst %.svg,%.pdf,$(wildcard $(FIGSDIR)/*.svg))
+SVG_PDF= $(patsubst %.svg,%.pdf,$(wildcard $(FIGSDIR)/*.svg))
 SVG_EPS= $(patsubst %.svg,%.eps,$(wildcard $(FIGSDIR)/*.svg))
 CLEAN_FILES+= $(SVG_PNG:.svg=.pdf)
 CLEAN_FILES+= $(SVG_PDF:.svg=.png)

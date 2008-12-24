@@ -28,8 +28,9 @@
 # LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):
 # LATEX_ENV+= TEXINPUTS=~/lib/latex//:lily:figs:data:out:src:config:$(TEXINPUTS):
 # 
-# include $(LATEXMK-FILE)
+#  # atenção, GENOS_LATEX deve vir antes de LATEXMK-FILE
 # include $(GENOS_LATEX)
+# include $(LATEXMK-FILE)
 #
 # Para um projeto que use todos esses componentes, o Makefile
 # recomendado, <projeto>/Makefile é:

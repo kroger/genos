@@ -106,10 +106,12 @@ CLEAN_FILES+= $(SVG_EPS:.svg=.eps)
 CLEAN_BEAMER = .nav .snm .vrb
 CLEAN_FILES+= $(foreach suffix,$(CLEAN_BEAMER),$(addsuffix $(suffix),$(NAME)))
 
-LATEX_ENV+= TEXINPUTS=:src:config:figs:data:lily:out:$(TEXINPUTS):
+LATEX_ENV+= TEXINPUTS=:src:config:figs:data:lily:out:
 
 vpath %.eps $(FIGSDIR)
 vpath %.eps $(DATADIR)
+vpath %.pdf $(FIGSDIR)
+vpath %.pdf $(DATADIR)
 vpath %.ly $(LILYDIR)
 vpath %.svg $(FIGSDIR)
 

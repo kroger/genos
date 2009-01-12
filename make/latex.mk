@@ -1,65 +1,3 @@
-# Seja bem vindo ao latex.mk do grupo de pesquisa genos.
-# 
-# Esse arquivo é o resultado de anos de frustração com o funcionamento
-# padrão do make e do latex-mk. O objetivo é poder, incluindo esse
-# arquivo no seu Makefile, compilar arquivos latex automaticamente,
-# sem maiores confusões. Pra isso funcionar, no entanto, precisamos de
-# algumas convenções e suposições sobre seu computador, senão as
-# coisas podem explodir de maneiras desagradáveis (não pergunte ;-) ).
-#
-# A primeira é que você está trabalhando com o seu latex organizado de
-# forma razoavelmente bonitinha. Esperamos uma estrutura de diretórios
-# mais ou menos assim:
-#
-# <projeto>/              <- o nome do seu projeto
-# <projeto>/<arquivo>.tex <- o seu arquivo tex
-# <projeto>/figs          <- as suas figuras estáticas
-# <projeto>/data          <- arquivos .plot e .dat pro gnuplot
-# <projeto>/lily          <- arquivos lilypond
-# ~/lib                   <- essa biblioteca
-# ~/bib                   <- a bibliografia do genos
-#
-# É necessário também ter um ~/.latexmk como esse:
-# 
-# LATEXMK-FILE = /usr/share/latex-mk/latex.gmk
-# GENOS_LATEX = ~/lib/make/latex.mk
-#
-# LATEX_ENV+= BIBINPUTS=~/lib/bib//:$(BIBINPUTS):
-# LATEX_ENV+= BSTINPUTS=~/lib/latex/bib/:bib:$(BSTINPUTS):
-# LATEX_ENV+= TEXINPUTS=~/lib/latex//:lily:figs:data:out:src:config:$(TEXINPUTS):
-# 
-#  # atenção, GENOS_LATEX deve vir antes de LATEXMK-FILE
-# include $(GENOS_LATEX)
-# include $(LATEXMK-FILE)
-#
-# Para um projeto que use todos esses componentes, o Makefile
-# recomendado, <projeto>/Makefile é:
-#  
-#   NAME = <arquivo>
-#   USE_PDFLATEX = 1
-#   VIEWPDF = evince
-#   # OTHER += $(LILY_PDF) # descomente se usar lilyponds
-#   # OTHER += $(GNUPLOY_PDF) # descomente se usar gnuplot
-#   # OTHER += $(SVG_PDF) # descomente se usar imagens svg
-#   # OTHER += $(DIA_PNG) # descomente se usar diagramas dia
-#   -include ~/.latexmk
-#
-# E pronto!
-# 
-# Com isso feito, o seu artigo latex será compilado pra pdf com
-# "make", será mostrado no evince com "make view", arquivos do gnuplot
-# serão plotados em pdf, diagramas svg serão convertidos para pdf,
-# diagramas dia serão convertidos pra png e o mundo viverá para sempre
-# de mãos dadas em um gramado infinito, e todo dia será natal (bom,
-# esses dois últimos são exagero, mas você entende).
-#
-# Caso tenha alguma dúvida, mande email para genos-users@listas.genos.mus.br
-#
-# Para ajudar, se quiser converter arquivos FOO em BAR antes de
-# incluir no seu artigo, coloque a linha OTHER += $(FOO_BAR) no seu
-# Makefile. Se ela não existir aqui, adicione!
-#
-
 LILYDIR = lily
 FIGSDIR = figs
 DATADIR = data
@@ -106,8 +44,6 @@ CLEAN_FILES+= $(SVG_EPS:.svg=.eps)
 
 CLEAN_BEAMER = .nav .snm .vrb
 CLEAN_FILES+= $(foreach suffix,$(CLEAN_BEAMER),$(addsuffix $(suffix),$(NAME)))
-
-LATEX_ENV+= TEXINPUTS=:src:config:figs:data:lily:out:
 
 vpath %.eps $(FIGSDIR)
 vpath %.eps $(DATADIR)

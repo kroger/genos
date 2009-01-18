@@ -104,7 +104,7 @@ doc: pdf
 	lilypond --png -o  $(basename $@) $<
 
 %.eps: %.ly
-	lilypond -b eps -o  $(basename $@) $<
+	lilypond -dbackend=eps -dno-gs-load-fonts -dinclude-eps-fonts -o $(basename $@) $<
 
 %.ps: %.ly
 	lilypond -f ps -o  $(basename $@) $<

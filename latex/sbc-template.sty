@@ -17,10 +17,10 @@
 \flushbottom
 
 % captions
-\RequirePackage[bf,sf,footnotesize,indent]{caption2}
-\setlength{\captionmargin}{0.8cm}
-\renewcommand{\captionfont}{\sffamily\footnotesize\bfseries}
-\renewcommand{\captionlabeldelim}{.}
+%\RequirePackage[bf,sf,footnotesize,indent]{caption2}
+%\setlength{\captionmargin}{0.8cm}
+%\renewcommand{\captionfont}{\sffamily\footnotesize\bfseries}
+%\renewcommand{\captionlabeldelim}{.}
 
 % font
 \RequirePackage{times}
@@ -33,7 +33,7 @@
 \newcounter{instn}
 \setcounter{instn}{1}
 \newcommand{\instnum}{\arabic{instn}}
-\newcommand{\inst}[1]{\ensuremath{^#1}}
+\newcommand{\inst}[1]{\ensuremath{^{#1}}}
 \newcommand{\nextinstitute}{\\\mbox{}\\[-6pt] \addtocounter{instn}{1}\inst{\instnum}}
 \newcommand{\email}[1]{\\\mbox{}\\[-6pt]\footnotesize\texttt{#1}}
 \renewcommand{\and}{, }
@@ -109,12 +109,12 @@
                        {\normalfont\normalsize\bfseries\boldmath
                         \rightskip=\z@ \@plus 8em\pretolerance=10000 }}
 
-% \renewcommand{\thesection}{\arabic{section}.}
-% \renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
-% \renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
+%\renewcommand{\thesection}{\arabic{section}.}
+%\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+%\renewcommand{\thesubsubsection}{\thesubsection\arabic{subsubsection}.}
 
 \RequirePackage{titlesec}
-\titlelabel{\thetitle\hspace{1ex}}
+\titlelabel{\thetitle.\hspace{1ex}}
 
 % first page
 

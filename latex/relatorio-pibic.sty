@@ -1,0 +1,138 @@
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{times}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{colortbl}
+
+\titleformat{\section}[block]
+{\bfseries\normalsize\sffamily} % format
+{\hspace{1.5em}\textcolor{blue}{\thesection.}} %label
+{.5em} %sep
+{\bfseries\vspace{-.3cm}} %before
+[\hspace{1.5em}\titlerule] %after
+
+\newcommand{\Section}[1]{
+  \section{\textcolor{blue}{#1}}
+}
+
+\newcommand{\Resumo}[1]{
+  \section*{\textcolor{blue}{#1}}
+}
+
+\newcommand{\resumo}[1]{
+  \Resumo{Resumo  (máximo de 220 palavras)}
+  {\fbox{\parbox[t][8cm]{16cm}{#1}}}
+}
+
+
+% \newcommand{\info}[1]{
+%   \vspace{-.5cm}
+%   %% \small{#1}}
+%   {\footnotesize \hspace*{1cm} \parbox{14cm}{\textcolor{red}{\textit{#1}}}}
+%   \vspace{.5cm}
+% }
+
+\newcommand{\info}[1]{}
+
+\newcommand{\tempo}[1]{(\textsf{#1})}
+
+
+\newcommand{\texttitulo}[1]{
+  \textsf{#1}
+}
+
+\newcommand{\texttitulocolor}[1]{
+  \textcolor{blue}{\texttitulo{\textbf{#1}}}
+}
+
+\newcommand{\dadosRelatorioFinal}[7]{
+  \begin{tabular}{
+      |>{\columncolor[gray]{.8}}p{4.5cm} |
+      >{}p{11cm}|
+    }
+    \hline
+    \texttitulocolor{Título do Plano de Trabalho do Bolsista} & \texttitulo{#1} \\
+    \hline
+    \texttitulocolor{Título do Projeto do Orientador} & \texttitulo{#2} \\
+    \hline
+    \texttitulocolor{Nome do Bolsista} & \texttitulo{#3} \\
+    \hline
+    \texttitulocolor{Nome do Orientador} & \texttitulo{#4} \\
+    \hline
+    \texttitulocolor{Grupo de Pesquisa \newline (opcional)} & \texttitulo{#5} \\
+    \hline
+    \texttitulocolor{Palavras Chave \newline (até 3)} & \texttitulo{#6} \\
+    \hline
+    \texttitulocolor{Período de Vigência} & \textsf{#7} \\
+    \hline
+  \end{tabular}
+}
+
+\newcommand{\dadosBolsista}[3]{
+  \begin{tabular}{
+      |>{\columncolor[gray]{.8}}p{4cm} |
+      >{}p{10cm}|
+    }
+    \hline
+    \texttitulocolor{Sub-Título do Plano de Trabalho} & \texttitulo{#1} \\
+    \hline
+    \texttitulocolor{Nome do Bolsista} & \texttitulo{#2} \\
+    \hline
+    \texttitulocolor{Edital} & \textsf{#3} \\
+    \hline
+  \end{tabular}
+}
+
+\newcommand{\cabecalho}[1]{
+\thispagestyle{empty}
+
+\begin{center}
+  \begin{minipage}[c]{2cm}
+      \includegraphics[scale=.5]{brasaoufba}
+
+    \end{minipage}\hfill
+    \begin{minipage}[c]{11cm}
+      \begin{center}
+        {\large \textbf{UNIVERSIDADE FEDERAL DA BAHIA}} \\
+        \textbf{PRÓ-REITORIA DE PESQUISA E PÓS-GRADUAÇÃO} \\
+        \textbf{\textit{Programa Institucional de Bolsas de Iniciação Científica}} \\
+        \textbf{PIBIC}
+      \end{center}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{1cm}
+      \includegraphics[scale=.7]{pibic}
+    \end{minipage}\hfill
+  \end{center}
+
+  \vspace{3cm}
+
+  \begin{center}
+    {\Large \textbf{\textit{#1}}}
+  \end{center}
+}
+
+\renewenvironment{thebibliography}[1]
+     {\Section{\refname}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}

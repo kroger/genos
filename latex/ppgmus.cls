@@ -175,10 +175,11 @@ texto texto texto texto
         & \\
         & \hspace{0.6cm} Orientador: \@orientador\\
         & \hspace{0.6cm} \ifthenelse{\equal{\@tipo}{doutorado}}
-        {Tese (Doutorado em \@area) -- }
-        {Dissertação (Mestrado em \@area) -- }
+        %% esperar confirmação do d ou m maiúsculo
+        {Tese (Doutorado) -- }
+        {Dissertação (Mestrado) -- }
         Universidade Federal \\
-        & da Bahia, Escola de Música, \@ano{}.\\
+        & da Bahia, \@ano{}.\\
         & \\
         & \hspace{0.6cm}
         %% comentar as chaves desnecessárias
@@ -186,7 +187,7 @@ texto texto texto texto
         2. \@chaveii.
         3. \@chaveiii.
         4. \@chaveiv. 
-        I. \@autor. II. Universidade Federal da Bahia. Escola de Música. III. Título.\\
+        I. \@orientadorbib. II. Universidade Federal da Bahia. Escola de Música. III. Título.\\
         & \\
         & \hspace{9cm} CDD \@cdd \\
         & \hspace{9cm} CDU \@cdu \\

@@ -1,0 +1,112 @@
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[margin=5em]{geometry}
+\usepackage{setspace}
+\usepackage{subfig}
+\usepackage{url}
+\usepackage{color}
+
+\interfootnotelinepenalty=10000
+\clubpenalty=10000
+\widowpenalty=10000
+
+\setlength{\columnsep}{2em}
+\setlength{\parindent}{0em}
+
+\newcommand{\cabecalho}[4]{
+  \twocolumn[
+  \large
+  UNIVERSIDADE FEDERAL DA BAHIA \\
+  ESCOLA DE MÚSICA \\
+  PROGRAMA DE PÓS-GRADUAÇÃO \\
+  DOUTORADO EM COMPOSIÇÃO \\
+  DISCIPLINA: #1 \\
+  PROFESSOR: #2 \\
+  ALUNO: #3 \\
+  DATA: \today
+
+  \vspace{1em}
+  \begin{center}
+    \Huge \textbf{#4}
+  \end{center}
+
+  \thispagestyle{empty}
+  \vspace{2em}
+  ]
+  \singlespacing
+}
+
+% usar para termos estrangeiros
+\newcommand{\eng}[1]{\textit{#1}}
+% \newcommand{\eg}[1]{\textit{\gls{#1}}}
+\newcommand{\eg}[1]{\textit{#1}}
+
+\newcommand{\opus}[1]{\textit{#1}}
+\newcommand{\tr}[1]{\textit{#1}}
+
+\newcommand{\contorno}[1]{$\langle #1 \rangle$}
+\newcommand{\contpr}{P(5 3 4 1 2 0)}
+\newcommand{\obra}{\textit{Em torno da romã}}
+\newcommand{\goiaba}{\opus{Goiaba}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+% usar para citação integral indentada com tradução
+\newcommand{\citacaolonga}[4]{
+  \begin{quote}
+    \normalsize
+%    \selectlanguage{english}
+    {#1}\footnote{
+      \selectlanguage{brazil}
+      ``{#2}''.
+    }.
+    \selectlanguage{brazil}
+    \cite[#3]{#4}.
+  \end{quote}
+}
+
+\newcommand{\citacaoinline}[4]{
+  ``#1''\footnote{
+    \selectlanguage{brazil}
+    ``{#2}''.}
+  \selectlanguage{brazil}
+  \cite[#3]{#4}.
+}
+
+\newcounter{notecounter}
+
+\newcommand{\note}[1]{
+  \addtocounter{notecounter}{1}
+  \textcolor{red}{[note \arabic{notecounter}: #1]}
+}
+
+\newcommand{\cinzaa}{
+  \multicolumn{1}{>{\columncolor[gray]{.5}}c}{}
+}
+
+\newcommand{\cinzab}{
+  \multicolumn{1}{>{\columncolor[gray]{.7}}c}{}
+}
+
+\newcommand{\music}[1]{\textit{\textbf{#1}}}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+% \N paragraph numbers
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+% Start each numbered parageraph with the \N command, which calculates
+% the number and typesets it in a consistent fashion.  Un-numbered
+% paragraphs can be included and get typeset with the same indent as
+% numbered paragraphs without the number in the indentation space.
+\newcounter{parnum}
+\newcommand{\N}{%
+  \noindent\refstepcounter{parnum}%
+  \makebox[\parindent][l]{\textbf{\arabic{parnum}.}}}
+% Use a generous paragraph indent so numbers can be fit inside the
+% indentation space.
+% \setlength{\parindent}{2em}
+
+\newcommand{\nota}[1]{\addtocounter{notecounter}{1}{\textcolor{red}{[nota
+      \arabic{notecounter}: #1]}}}

@@ -41,6 +41,10 @@
         {MUS #1 --- LEM IV}
         {\ifthenelse{\equal{#1}{013}}
           {MUS #1 --- LEM V}
+        {\ifthenelse{\equal{#1}{104}}
+          {MUS #1 --- Instrumentação e Orquestração I}
+          {\ifthenelse{\equal{#1}{105}}
+            {MUS #1 --- Instrumentação e Orquestração II}
           {\ifthenelse{\equal{#1}{110}}
             {MUS #1 --- Composição III}
             {\ifthenelse{\equal{#1}{111}}
@@ -59,6 +63,14 @@
                         {\ifthenelse{\equal{#1}{506}}
                           {MUS #1 --- Informática em Música II}}}}}}}}}}}}}}
 
+\newcommand{\professor}[1]{
+  \ifthenelse{\equal{#1}{pedro}}
+  {Pedro Kröger \url{<pedro.kroger@gmail.com>}}
+  {\ifthenelse{\equal{#1}{marcos}}
+    {Marcos di Silva \url{<mdsmus@gmail.com>}}
+    {\ifthenelse{\equal{#1}{guilherme}}
+      {Guilherme Berstissolo \url{<guilhermebertissolo@gmail.com>}}}}}
+
 \newcommand{\cabecalho}[2]{
   \large
   \titulo{UNIVERSIDADE FEDERAL DA BAHIA}
@@ -69,6 +81,14 @@
     \titulo{DEPARTAMENTO DE CLEM}}
   \textbf{Disciplina}:\disciplina{#1}\,---\,#2\\
   \textbf{Prof.}: Pedro Kröger \url{<pedro.kroger@gmail.com>} \\
+  % \textbf{Prof.}: \professor{#1} \\
+  % \ifthenelse{\equal{#1}{marcos}}
+  % \textbf{Página da disciplina:} http://marcosdisilva.net/pt/ensino/{mus#1}.html \\
+  % \ifthenelse{\equal{#1}{pedro}}
+  % \textbf{Página da disciplina:} http://genos.mus.br/aulas/\ifthenelse{\equal{#1}{A56}}{mata56}{mus#1} \\
+  % \ifthenelse{\equal{#1}{052}}
+  % {\textbf{Cadastro e histórico da lista de discussão:} \textsf{listas.dcc.ufba.br/pipermail/mat052t01}}
+  % {}
   \textbf{Página da disciplina:} http://genos.mus.br/aulas/\ifthenelse{\equal{#1}{A56}}{mata56}{mus#1} \\
   \ifthenelse{\equal{#1}{052}}
   {\textbf{Cadastro e histórico da lista de discussão:} \textsf{listas.dcc.ufba.br/pipermail/mat052t01}}

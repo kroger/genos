@@ -22,4 +22,4 @@ key.base = lower
 key.number.separator = "-"
 sort = {on}
 sort.format = {%N(author)}
-key.generation = {on}
+key.generation = {off}

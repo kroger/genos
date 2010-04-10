@@ -1627,7 +1627,7 @@ FUNCTION {make.translators}
         { "t"
         }
       if$                  %$
-      "ranslated " *
+      "raduzido " *
       flanguage empty$                  %$
         'skip$                  %$
         { "de " * flanguage * space *
@@ -3076,7 +3076,7 @@ FUNCTION {minorthesis}
 }
 FUNCTION {phdthesis}
 { type empty$               %$
-    { "Ph.D.~diss."
+    { "Tese~de~doutorado"
     }
     { type
     }

@@ -2,7 +2,7 @@
 \ProvidesClass{genos-technical-report}[2010/10/25]
 \LoadClass[10pt,oneside]{article}
 
-\RequirePackage[a4paper,top=2.5cm,left=2cm,right=2cm,bottom=3cm]{geometry}
+\RequirePackage[a4paper,top=2cm,left=1.5cm,right=1.5cm,bottom=2cm]{geometry}
 \RequirePackage{graphicx,url}
 \RequirePackage[utf8,utf8x]{inputenc}
 \RequirePackage{parskip}
@@ -64,8 +64,16 @@
   \thispagestyle{empty}
 
   \pagebreak
+
+  \date{}
+  \setlength{\columnsep}{1em}
   \twocolumn
   \maketitle
-  \thispagestyle{empty}
-}
 
+  \thispagestyle{empty}
+  \pagestyle{myheadings}
+  \markright{Genos Technical Reports\hfill Year \@TRyear, Number
+    \@TRnumber \hfill}
+
+  \normalsize
+}

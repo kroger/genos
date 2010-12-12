@@ -8,34 +8,62 @@
 \RequirePackage{parskip}
 \usepackage[normalem]{ulem}
 
+\newcounter{instn}
+\setcounter{instn}{1}
+\newcommand{\instnum}{\arabic{instn}}
+\newcommand{\inst}[1]{\ensuremath{^{#1}}}
+\newcommand{\nextinstitute}{\\\mbox{}\\[-6pt] \addtocounter{instn}{1}\inst{\instnum}}
+\newcommand{\email}[1]{\\\mbox{}\\[-6pt]\footnotesize\texttt{#1}}
+\renewcommand{\and}{, }
+
 \def\title#1{\gdef\@title{#1}}
 \def\author#1{\gdef\@author{#1}}
+\def\address#1{\gdef\@address{#1}}
+
 \def\TRyear#1{\gdef\@TRyear{#1}}
 \def\TRnumber#1{\gdef\@TRnumber{#1}}
 
+\def\@maketitle{\newpage
+  \begin{center}
+    \vspace*{2em}
+    {\huge\bf\@title\par}
+    \vglue 6pt plus 3pt minus 3pt
+    {\normalsize
+      \textbf{\begin{tabular}[t]{c}\@author\end{tabular}}\par}
+    \vglue 6pt plus 3pt minus 3pt
+    {\normalsize
+      \begin{tabular}[t]{c}\inst{\instnum}\@address\end{tabular}\par}
+    \vglue 6pt plus 3pt minus 3pt
+  \end{center}
+  \vspace*{3em}
+}
+
 \newcommand{\titulofonte}[1]{\textsf{\textbf{\MakeUppercase#1}}\\}
 
-\newcommand{\capa}[0]{
+\newcommand{\cover}[0]{
   \onecolumn
   \begin{center}
-
     \includegraphics[scale=.1]{ufbaselo} \hfill
     \Huge GENOS TECHNICAL REPORT \hfill
-    \includegraphics[scale=.1]{new-genos-logo} \\
+    \includegraphics[scale=.115]{new-genos-logo} \\
   \end{center}
 
   \begin{flushright}
-    ISSN 123456
+    ISSN [in progress]
   \end{flushright}
 
   \vspace{1em}
   \hrule height .1em
 
-  \Large Number \@TRnumber
+  \begin{center}
+    \Large Number \@TRnumber, \@TRyear
+    \hfill
+    \Large
+    Universidade Federal da Bahia
+  \end{center}
 
   \begin{flushright}
     \Large
-    Universidade Federal da Bahia\\
     Genos Research Group
   \end{flushright}
 
@@ -45,18 +73,16 @@
     \Huge \@title\\
     \vspace{1em}
     \large \textit{\@author}
-    \vfill
-    \@TRyear
   \end{center}
 
   \vfill
+  \vspace{10em}
 
   \begin{flushright}
     \normalsize
     Av. Araújo Pinho, 58\\
     Escola de Música da UFBA\\
-    40110-040 Salvador BA\\
-    Brasil\\
+    40110-040 Salvador BA Brazil\\
     \vspace{.5em}
     \url{http://genos.mus.br}
   \end{flushright}
@@ -72,8 +98,8 @@
 
   \thispagestyle{empty}
   \pagestyle{myheadings}
-  \markright{Genos Technical Reports\hfill Year \@TRyear, Number
-    \@TRnumber \hfill}
+  \markright{Genos Technical Reports\hfill Number
+    \@TRnumber, \@TRyear \hfill}
 
   \normalsize
 }

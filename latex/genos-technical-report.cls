@@ -19,6 +19,7 @@
 \def\title#1{\gdef\@title{#1}}
 \def\author#1{\gdef\@author{#1}}
 \def\address#1{\gdef\@address{#1}}
+\def\summary#1{\gdef\@summary{#1}}
 
 \def\TRyear#1{\gdef\@TRyear{#1}}
 \def\TRnumber#1{\gdef\@TRnumber{#1}}
@@ -91,10 +92,13 @@
 
   \pagebreak
 
-  \date{}
   \setlength{\columnsep}{1em}
   \twocolumn
   \maketitle
+
+  \begin{abstract}
+    \@summary
+  \end{abstract}
 
   \thispagestyle{empty}
   \pagestyle{myheadings}

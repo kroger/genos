@@ -41,22 +41,27 @@
 \frontmatter
 
 \maketitle
-%% remove sumário do sumário
-\addtocontents{toc}{\protect\setcounter{tocdepth}{-2}}
-\tableofcontents
-\addtocontents{toc}{\protect\setcounter{tocdepth}{5}}
 
 \chapter*{Agradecimentos}
 \label{cha:agradecimentos}
-
-\chapter*{Glossário}
-\label{cha:glossario}
 
 \chapter*{Resumo}
 \label{cha:resumo}
 
 \chapter*{Abstract}
 \label{cha:abstract}
+
+%% remove sumário do sumário
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-2}}
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{5}}
+
+\listoftables
+\listoffigures
+
+\chapter*{Glossário}
+\label{cha:glossario}
+
 
 %% é importante ter esse mainmatter para indicar que começa o corpo do
 %% texto

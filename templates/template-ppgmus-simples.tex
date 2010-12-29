@@ -1,0 +1,61 @@
+\documentclass{ppgmus}
+
+\titulo{Minha Dissertação}
+\autor{José das Couves}
+\ano{2008}
+\tipo{mestrado}
+\area{Composição}
+\lugar{Salvador}
+\orientador{Prof. Dr. Foo Bar}
+\mes{Janeiro}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+%% remove sumário do sumário
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-2}}
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{5}}
+
+\chapter*{Agradecimentos}
+\label{cha:agradecimentos}
+
+\chapter*{Glossário}
+\label{cha:glossario}
+
+\chapter*{Resumo}
+\label{cha:resumo}
+
+\chapter*{Abstract}
+\label{cha:abstract}
+
+%% é importante ter esse mainmatter para indicar que começa o corpo do
+%% texto
+\mainmatter
+
+\chapter{Introdução}
+
+\section{teste1}
+
+\newpage
+
+\section{teste2}
+
+\newpage
+
+\section{teste3}
+
+\appendix
+
+\chapter{Dados estatísticos}
+\label{cha:dados-estatisticos}
+
+%%%% Bibliografia
+
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{plain}
+\bibliography{composition}
+
+\end{document}

@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{hyperref}
 
 \frenchspacing
 \sloppy

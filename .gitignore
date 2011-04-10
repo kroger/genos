@@ -1,0 +1,5 @@
+*~
+templates/*.aux
+templates/*.log
+templates/*.out
+templates/*.pdf

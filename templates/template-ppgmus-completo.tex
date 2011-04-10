@@ -1,0 +1,94 @@
+\documentclass{ppgmus}
+
+\titulo{Minha Dissertação}
+\autor{José das Couves}
+\ano{2008}
+\tipo{mestrado}
+\area{Composição}
+\lugar{Salvador}
+\orientador{Prof. Dr. Foo Bar}
+\mes{Janeiro}
+
+\textoDedicatoria{A fulano, ciclano e beltrano.}
+
+\textoEpigrafe{Bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+  bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+  bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+  bla bla bla.}
+
+\autorEpigrafe{Confucio}
+
+\dataDefesa{Salvador}
+\localDefesa{19 de dezembro de 2004}
+
+\bancaiNome{Jamary Olveira}
+\bancaiTitulo{Doutor em Composição}
+\bancaiEstudo{\textit{University of Texas at Austin}, EUA}
+\bancaiAtuacao{Universidade Federal da Bahia}
+
+\bancaiiNome{Lucas Robatto}
+\bancaiiTitulo{Doutor em Flauta}
+\bancaiiEstudo{Universidade de Washington, EUA}
+\bancaiiAtuacao{Universidade Federal da Bahia}
+
+\bancaiiiNome{Wellington Gomes da Silva}
+\bancaiiiTitulo{Doutor em Música}
+\bancaiiiEstudo{Universidade Federal da Bahia (UFBA)}
+\bancaiiiAtuacao{Universidade Federal da Bahia}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\chapter*{Agradecimentos}
+\label{cha:agradecimentos}
+
+\chapter*{Resumo}
+\label{cha:resumo}
+
+\chapter*{Abstract}
+\label{cha:abstract}
+
+%% remove sumário do sumário
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-2}}
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{5}}
+
+\listoftables
+\listoffigures
+
+\chapter*{Glossário}
+\label{cha:glossario}
+
+
+%% é importante ter esse mainmatter para indicar que começa o corpo do
+%% texto
+\mainmatter
+
+\chapter{Introdução}
+
+
+\section{teste1}
+
+\newpage
+
+\section{teste2}
+
+\newpage
+
+\section{teste3}
+
+\appendix
+
+\chapter{Dados estatísticos}
+\label{cha:dados-estatisticos}
+
+%%%% Bibliografia
+
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{plain}
+\bibliography{composition}
+
+\end{document}

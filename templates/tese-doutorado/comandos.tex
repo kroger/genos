@@ -1,0 +1,81 @@
+\usepackage[scaled=.75]{beramono}
+\usepackage{ltablex}
+\usepackage{rotating}
+\usepackage[nonumberlist]{glossaries}
+\usepackage{ulem}
+\usepackage{multirow}
+\usepackage{pgffor}
+\usepackage[portuguese,algochapter]{algorithm2e}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+%% Termos estrangeiros
+\newcommand{\eng}[1]{\textit{#1}}
+%% Nomes de obras
+\newcommand{\opus}[1]{\textit{#1}}
+%% Dinâmicas
+\newcommand{\dyn}[1]{\textbf{\textit{#1}}}
+
+% usar para citação integral indentada com tradução
+\newcommand{\citacaolonga}[3]{
+  \singlespacing
+  \begin{quote}
+    \normalsize
+    \selectlanguage{brazil}
+    {#2}\footnote{
+      \selectlanguage{english}
+      ``{#1}''.
+    } \selectlanguage{brazil} #3.
+  \end{quote}
+  \doublespacing
+}
+
+\newcommand{\citacaolongabr}[2]{
+  \singlespacing
+  \begin{quote}
+    \normalsize
+    \selectlanguage{brazil}
+    {#1} #2.
+  \end{quote}
+  \doublespacing
+}
+
+\newcommand{\citacaoinline}[3]{
+  ``#2''\footnote{
+    \selectlanguage{english}
+    ``{#1}''.} \selectlanguage{brazil} #3.
+}
+
+\newcommand{\traducaolonga}[2]{
+  \singlespacing
+  \begin{quote}
+    \normalsize
+   \selectlanguage{brazil}
+    {#2}\footnote{
+      \selectlanguage{english}
+      ``{#1}''.
+    }.
+    \selectlanguage{brazil}.
+  \end{quote}
+  \doublespacing
+}
+
+\newcommand{\traducaoinline}[2]{
+  ``#2''\footnote{
+    \selectlanguage{english}
+    ``{#1}''.}
+  \selectlanguage{brazil}
+}
+
+%% Usar para inserir arquivo pdf com múltiplas páginas
+\newcommand{\score}[2]{
+  \foreach \i in {#2}{
+    \includegraphics[scale=.80,page=\i]{#1}\pagebreak\par
+  }
+}
+
+%% cria glossários
+\makeglossaries
+
+%% Inserir separação de sílaba não prevista
+\hyphenation{car-di-na-li-da-de}

@@ -1,0 +1,109 @@
+\documentclass{ppgmus}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{colortbl}
+% \usepackage{parskip}
+\usepackage{listings}
+\usepackage{kchicago}
+\usepackage{times}
+\usepackage[pdfpagelabels=true]{hyperref}
+\usepackage[brazil]{translator}
+
+% conta subsubseções
+\setcounter{secnumdepth}{3}
+
+\input{comandos}
+\input{glossario}
+
+\titulo{Título da Tese}
+\autor{Autor da tese}
+\ano{2013}
+\tipo{doutorado}
+\area{Composição}
+\lugar{Salvador}
+\orientador{Prof. Dr. Orientador}
+\mes{Fevereiro}
+
+\textoDedicatoria{A fulano, ciclano e beltrano.}
+
+\textoEpigrafe{Bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+  bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+  bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+  bla bla bla.}
+
+\autorEpigrafe{Confucio}
+
+\dataDefesa{Salvador}
+\localDefesa{28 de fevereiro de 2013}
+
+% banca
+\bancaiNome{Pedro Ribeiro Kroger Júnior}
+\bancaiTitulo{Doutor em Composição}
+\bancaiEstudo{Universidade Federal da Bahia}
+\bancaiAtuacao{Universidade Federal da Bahia}
+
+\bancaiiNome{Liduino José Pitombeira de Oliveira}
+\bancaiiTitulo{Doutor em Composição}
+\bancaiiEstudo{\textit{Louisianna State University}, EUA}
+\bancaiiAtuacao{Universidade Federal de Campina Grande}
+
+\bancaiiiNome{Paulo Costa Lima}
+\bancaiiiTitulo{Doutor em Educação}
+\bancaiiiEstudo{Universidade Federal da Bahia}
+\bancaiiiAtuacao{Universidade Federal da Bahia}
+
+\bancaivNome{Lucas Robatto}
+\bancaivTitulo{Doutor em Flauta}
+\bancaivEstudo{\textit{University of Washington}, EUA}
+\bancaivAtuacao{Universidade Federal da Bahia}
+
+\bancavNome{Hugo Leonardo Ribeiro}
+\bancavTitulo{Doutor em Etnomusicologia}
+\bancavEstudo{Universidade Federal da Bahia}
+\bancavAtuacao{Universidade de Brasília}
+
+% ficha catalográfica
+\chavei{Composição (Música)}
+\chaveii{Teoria musical}
+\chaveiii{Título}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\chapter*{Agradecimentos}
+\label{cha:agradecimentos}
+\input{agradecimentos}
+
+\chapter*{Resumo}
+\label{cha:resumo}
+\input{resumo}
+
+\chapter*{Abstract}
+\label{cha:abstract}
+\input{abstract}
+
+% conta subsubseções
+\setcounter{tocdepth}{3}
+
+%% remove sumário do sumário
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-2}}
+\tableofcontents
+\addtocontents{toc}{\protect\setcounter{tocdepth}{5}}
+
+\listoftables
+\listoffigures
+\listofalgorithms
+
+%% insere glossário
+\printglossaries
+
+%% É importante ter esse mainmatter para indicar que começa o corpo do
+%% texto
+\mainmatter
+
+\input{corpoDoTexto}
+
+\end{document}

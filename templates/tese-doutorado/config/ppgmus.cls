@@ -169,7 +169,7 @@ texto texto texto texto
       \vspace{-0.2cm}
       \begin{tabular}{|cp{30em}|} \hline
         \hspace{1.3cm} & \\
-        \@cutter & \@autorbib \\
+        \@cutter & \@autor \\
         & \hspace{0.6cm} \@titulo{} / \@autor{}. -- \@ano{}. \\
         & \hspace{0.6cm} \pageref{LastPage}f. : il. \\
         & \\
@@ -187,7 +187,7 @@ texto texto texto texto
         2. \@chaveii.
         3. \@chaveiii.
         4. \@chaveiv.
-        I. \@orientadorbib. II. Universidade Federal da Bahia. Escola de Música. III. Título.\\
+        I. \@orientador. II. Universidade Federal da Bahia. Escola de Música. III. Título.\\
         & \\
         & \hspace{9cm} CDD \@cdd \\
         & \hspace{9cm} CDU \@cdu \\
@@ -287,7 +287,7 @@ texto texto texto texto
 \renewcommand{\maketitle}{
   \capa
   \folhaDeRosto
-  \ifdefined\@autorbib\fichaCatalografica\fi
+  \ifdefined\@cutter\fichaCatalografica\fi
   \folhaDeGuarda
   \ifdefined\@figuraTermo\termoAprov\fi
   \ifdefined\@bancaiNome\termoDeAprovacao\fi
@@ -362,4 +362,3 @@ texto texto texto texto
 }
 
 \makeatother
-

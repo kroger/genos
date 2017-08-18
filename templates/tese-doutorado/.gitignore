@@ -1,0 +1,26 @@
+# -*- mode: shell-script -*-
+
+# Ignore these files
+
+/*.acn
+/*.aux
+/*.bbl
+/*.blg
+/*.glg
+/*.glo
+/*.glo.old
+/*.gls
+/*.gls.old
+/*.ilg
+/*.ist
+/*.loa
+/*.lof
+/*.lof.old
+/*.log
+/*.lot
+/*.lot.old
+/*.out
+/*.pdf
+/*.toc
+/*.toc.old
+/auto

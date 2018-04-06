@@ -1,0 +1,25 @@
+ignored.word = "a"
+ignored.word = "o"
+ignored.word = "em"
+ignored.word = "from"
+ignored.word = "for"
+ignored.word = "of"
+ignored.word = "-"
+ignored.word = "and"
+ignored.word = "in"
+ignored.word = "this"
+ignored.word = "on"
+ignored.word = "new"
+print.use.tab = off
+key.format =
+{(key)
+  {%s($key)}
+  { {%-1n(author) # %-1n(editor)}
+    {%2d(year)}: %-T(title)}
+}
+
+key.base = lower
+key.number.separator = "-"
+sort = {on}
+sort.format = {%N(key)}
+key.generation = {off}
